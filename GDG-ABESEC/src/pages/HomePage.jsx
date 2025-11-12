@@ -1,10 +1,13 @@
 import About from "../components/About";
-import OrganisersAndActingGenerals from "../components/OrganiserAndActingGenerals"; 
+import Footer from "../components/Footer";
+
 export default function HomePage() {
   return (
-    <div className="w-full  overflow-x-hidden">
-      <About /> 
-      <OrganisersAndActingGenerals />
-    </div>
+    <>
+      <div className="w-full  overflow-x-hidden">
+        <About />
+      </div>
+      <Footer />
+    </>
   );
 }
