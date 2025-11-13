@@ -69,13 +69,6 @@ export default function About() {
 
   return (
     <>
-      <section className="min-h-screen bg-black flex items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-5xl font-bold text-slate-100 mb-4">Welcome Section</h2>
-          <p className="text-xl text-slate-400">Scroll down to see About...</p>
-        </div>
-      </section>
-
       <section className="min-h-screen bg-black py-20 px-6 md:px-12 lg:px-20 relative overflow-hidden">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
