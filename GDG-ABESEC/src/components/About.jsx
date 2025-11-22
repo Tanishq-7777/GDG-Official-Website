@@ -51,7 +51,12 @@ const CardBody = ({ children, className = "" }) => {
 
 const CardItem = ({ children, translateZ = 0 }) => {
   return (
-    <div style={{ transform: `translateZ(${translateZ}px)`, transformStyle: "preserve-3d" }}>
+    <div
+      style={{
+        transform: `translateZ(${translateZ}px)`,
+        transformStyle: "preserve-3d",
+      }}
+    >
       {children}
     </div>
   );
@@ -72,23 +77,31 @@ export default function About() {
       <section className="min-h-screen bg-black py-20 px-6 md:px-12 lg:px-20 relative overflow-hidden">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-6xl md:text-7xl font-bold text-slate-300 mb-4" >
-              About Us
+            <h2 className="text-6xl md:text-7xl font-bold text-slate-300 mb-4">
+              About{" "}
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-green-300 to-blue-400">
+                Us
+              </span>
             </h2>
-            <div
-              className="h-[3px] w-64 rounded-full mx-auto bg-linear-to-r from-transparent via-blue-500 to-transparent"
-              
-            ></div>
+
+            <div className="h-[3px] w-64 rounded-full mx-auto bg-linear-to-r from-transparent via-blue-500 to-transparent"></div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mt-20">
-            <div className="order-2 lg:order-1" data-aos="fade-up" >
+            <div className="order-2 lg:order-1" data-aos="fade-up">
               <p className="text-slate-300 text-left text-lg  font-light font-mono leading-relaxed">
-                Google Developer Groups (GDG) on Campus ABESEC is a vibrant community driven by curiosity, collaboration, and innovation. We bring together passionate developers, designers, and problem-solvers to explore technologies and turn ideas into impactful projects. Through workshops, hackathons, and sessions, GDG ABESEC empowers students to learn, build, and grow in a supportive ecosystem bridging classroom learning with real-world experience.
+                Google Developer Groups (GDG) on Campus ABESEC is a vibrant
+                community driven by curiosity, collaboration, and innovation. We
+                bring together passionate developers, designers, and
+                problem-solvers to explore technologies and turn ideas into
+                impactful projects. Through workshops, hackathons, and sessions,
+                GDG ABESEC empowers students to learn, build, and grow in a
+                supportive ecosystem bridging classroom learning with real-world
+                experience.
               </p>
             </div>
 
-            <div className="order-1 lg:order-2" data-aos="fade-up" >
+            <div className="order-1 lg:order-2" data-aos="fade-up">
               <CardContainer>
                 <CardBody className="relative rounded-2xl overflow-hidden border border-slate-700/50 bg-slate-900/40 backdrop-blur-sm hover:border-slate-400/50 transition-all duration-300">
                   <CardItem translateZ={100}>

@@ -1,5 +1,5 @@
-@import "tailwindcss";
 @import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap");
+@import "tailwindcss";
 
 html,body,#root{
 overflow-x: hidden;
@@ -14,4 +14,13 @@ overflow-x: hidden;
   font-family: "Space Mono", monospace;
   font-weight: 700;
   font-style: normal;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }

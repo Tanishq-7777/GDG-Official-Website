@@ -11,7 +11,7 @@ const Home = () => {
           speed={0.6}
           borderColor="#222"
           squareSize={60}
-          hoverFillColor="#6366F1"
+          hoverFillColor="#21334e"
         />
       </div>
 
@@ -31,8 +31,8 @@ const Home = () => {
           <span className="text-red-500">e</span>
         </div>
 
-        <div className="fixed text-white text-xl md:text-3xl top-28 left-4 md:top-16 md:left-63 font-mono space-mono-bold">
-          Developers
+        <div className="fixed text-white text-xl md:text-3xl top-28 left-4 md:top-16 md:left-63 ml-3 space-mono-regular space-mono-bold">
+          Developers Group
         </div>
       </div>
 
@@ -41,7 +41,7 @@ const Home = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="text-3xl sm:text-5xl md:text-7xl font-extrabold font-mono text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-yellow-400 via-green-500 to-red-500 drop-shadow-[0_0_25px_rgba(255,255,255,0.1)]"
+          className="text-3xl sm:text-5xl md:text-7xl font-extrabold space-mono-regular text-transparent bg-clip-text bg-linear-to-r from-blue-500 via-yellow-400 via-green-500 to-red-500 drop-shadow-[0_0_25px_rgba(255,255,255,0.1)]"
         >
           Welcome to <span className="text-blue-500">G</span>
           <span className="text-red-500">o</span>

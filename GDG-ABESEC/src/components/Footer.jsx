@@ -5,6 +5,9 @@ import gdgLogo from "../assets/gdg-logo.png"; // transparent background recommen
 
 const Footer = () => {
   return (
+    <>
+  
+
     <footer className="bg-black text-white py-8 flex flex-col items-center space-y-8">
       {/* Curved marquee text */}
       <CurvedLoop marqueeText="Google Developers Group " speed={2} direction="left" />
@@ -117,6 +120,7 @@ const Footer = () => {
         © {new Date().getFullYear()} Google Developer Group ABESEC. All rights reserved.
       </div>
     </footer>
+    </>
   );
 };
 

@@ -137,7 +137,7 @@ export const AnimatedTestimonials = ({
        <a href={testimonials[active].socials.linkedin}
       target="_blank"
       rel="noopener noreferrer"
-      className="text-gray-400 hover:text-blue-600 transition-all duration-300 ease-in-out transform hover:scale-115 rounded-full p-2 hover:bg-blue-100/30 hover:shadow-[0_0_6px_#3b82f680]">
+      className="text-gray-400 rounded-2xl hover:text-blue-500 transition-all duration-300 ease-in-out transform hover:scale-115 rounded-full p-2 ">
       <FaLinkedin />
     </a>
   )}
@@ -146,7 +146,7 @@ export const AnimatedTestimonials = ({
       href={testimonials[active].socials.twitter}
       target="_blank"
       rel="noopener noreferrer"
-      className="text-gray-400 hover:text-sky-500 transition-all duration-300 ease-in-out transform hover:scale-115 rounded-full p-2 hover:bg-sky-100/30 hover:shadow-[0_0_6px_#38bdf880]"
+      className="text-gray-400 hover:text-sky-500 transition-all duration-300 ease-in-out transform hover:scale-115 rounded-full p-2 "
     >
       <FaTwitter />
     </a>
@@ -156,7 +156,7 @@ export const AnimatedTestimonials = ({
       href={testimonials[active].socials.github}
       target="_blank"
       rel="noopener noreferrer"
-      className="text-gray-400 hover:text-gray-800 dark:hover:text-gray-100 transition-all duration-300 ease-in-out transform hover:scale-115 rounded-full p-2 hover:bg-gray-200/20 hover:shadow-[0_0_5px_#1f293780]"
+      className="text-gray-400 hover:text-gray-800 dark:hover:text-gray-100 transition-all duration-300 ease-in-out transform hover:scale-115 rounded-full p-2 "
     >
       <FaGithub />
     </a>
@@ -166,13 +166,13 @@ export const AnimatedTestimonials = ({
           <div className="flex gap-4 pt-12 md:pt-0">
             <button
               onClick={handlePrev}
-              className="group/button flex h-7 w-7 items-center justify-center rounded-full bg-gray-100 dark:bg-neutral-800">
+              className="group/button flex h-7 w-7  cursor-pointer items-center justify-center rounded-full bg-gray-100 dark:bg-neutral-800">
               <IconArrowLeft
                 className="h-5 w-5 text-black transition-transform duration-300 group-hover/button:rotate-12 dark:text-neutral-400" />
             </button>
             <button
               onClick={handleNext}
-              className="group/button flex h-7 w-7 items-center justify-center rounded-full bg-gray-100 dark:bg-neutral-800">
+              className="group/button cursor-pointer flex h-7 w-7 items-center justify-center rounded-full bg-gray-100 dark:bg-neutral-800">
               <IconArrowRight
                 className="h-5 w-5 text-black transition-transform duration-300 group-hover/button:-rotate-12 dark:text-neutral-400" />
             </button>
