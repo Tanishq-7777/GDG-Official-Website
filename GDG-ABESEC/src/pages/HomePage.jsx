@@ -1,11 +1,12 @@
-import About from "../components/About";
 import Home from "../components/Home";
-import DomeGallery from "../components/ui/DomeGalery";
+import About from "../components/About";
+import OrganisersAndActingGenerals from "../components/OrganiserAndActingGenerals";
+import Footer from "../components/Footer";
+
 export default function HomePage() {
   return (
     <div className="w-full  overflow-x-hidden">
-      <Home />
-      <About />
+      <About /> 
     </div>
   );
 }
