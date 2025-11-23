@@ -9,9 +9,9 @@ const Home = () => {
         <Squares
           direction="diagonal"
           speed={0.6}
-          borderColor="#222"
-          squareSize={60}
-          hoverFillColor="#21334e"
+          borderColor="#0e071f"
+          squareSize={55}
+          hoverFillColor="#0e071f"
         />
       </div>
 
