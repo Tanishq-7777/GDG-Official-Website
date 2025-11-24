@@ -9,7 +9,7 @@ function OrganisersAndActingGenerals() {
         "Leading with vision and purpose. Inspiring teams as a Team Leader and Community Builder to drive innovation and collaboration.",
       name: "Arya Schwetank",
       designation: "Organizer, GDG ABESEC",
-      src: "Organiser.jpg",
+      src: "OrganiserAndAG'sImages/Organiser.jpg",
       socials: {
         linkedin: "https://www.linkedin.com/in/aryaschwetank/",
         twitter: "https://x.com/aryaschwetank",
@@ -21,7 +21,7 @@ function OrganisersAndActingGenerals() {
         "Connecting ideas to transformative opportunities. As a Tech Strategist, bridging technology and creativity to craft solutions that shape the future.",
       name: "Ayush Jain",
       designation: "Acting General, GDG ABESEC",
-      src: "ActingGeneral1.jpg",
+      src: "OrganiserAndAG'sImages/ActingGeneral1.jpg",
       socials: {
         linkedin: "https://www.linkedin.com/in/urayushjain/",
         twitter: "https://x.com/urayushjain",
@@ -33,7 +33,7 @@ function OrganisersAndActingGenerals() {
         "Transforming code into meaningful impact. As a Developer Extraordinaire, building applications that solve real-world challenges with precision.",
       name: "Prakhar Tiwari",
       designation: "Acting General, GDG ABESEC",
-      src: "ActingGeneral2.jpg",
+      src: "OrganiserAndAG'sImages/ActingGeneral2.jpg",
       socials: {
         linkedin: "https://www.linkedin.com/in/prakhar-tiwari1908/",
         twitter: "https://x.com/tPrakhar19",
@@ -45,7 +45,7 @@ function OrganisersAndActingGenerals() {
         "Crafting compelling narratives through the lens. As a Creative Director, capturing moments that inspire, engage, and leave a lasting impression.",
       name: "Riya Jaiswal",
       designation: "Acting General, GDG ABESEC",
-      src: "ActingGeneral3.jpg",
+      src: "OrganiserAndAG'sImages/ActingGeneral3.jpg",
       socials: {
         linkedin: "https://www.linkedin.com/in/riyajstar07/",
         twitter: "https://x.com/riyajstar07",
@@ -57,7 +57,7 @@ function OrganisersAndActingGenerals() {
         "Solving complex problems with precision and insight. As a DSA Specialist, optimizing algorithms and strategies to achieve maximum impact.",
       name: "Deepanshu Kaushik",
       designation: "Acting General, GDG ABESEC",
-      src: "ActingGeneral4.jpg",
+      src: "OrganiserAndAG'sImages/ActingGeneral4.jpg",
       socials: {
         linkedin:
           "https://www.linkedin.com/in/deepanshu-kaushik-174059297/",
@@ -70,7 +70,7 @@ function OrganisersAndActingGenerals() {
         "Ensuring seamless collaboration and alignment. As a Strategic Maestro, guiding teams with foresight, clarity, and a vision for excellence.",
       name: "Kshitiz Srivastav",
       designation: "Acting General, GDG ABESEC",
-      src: "ActingGeneral5.jpg",
+      src: "OrganiserAndAG'sImages/ActingGeneral5.jpg",
       socials: {
         linkedin:
           "https://www.linkedin.com/in/kshitiz-srivastav-a87028333/",
