@@ -89,7 +89,7 @@ export default function About() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mt-20">
             <div className="order-2 lg:order-1" data-aos="fade-up">
-              <p className="text-slate-300 text-left text-lg  font-light font-mono leading-relaxed">
+              <p className="text-slate-300 text-left text-lg  font-light font-sans leading-relaxed">
                 Google Developer Groups (GDG) on Campus ABESEC is a vibrant
                 community driven by curiosity, collaboration, and innovation. We
                 bring together passionate developers, designers, and

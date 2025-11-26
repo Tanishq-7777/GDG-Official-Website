@@ -49,7 +49,7 @@ function OrganisersAndActingGenerals() {
       socials: {
         linkedin: "https://www.linkedin.com/in/riyajstar07/",
         twitter: "https://x.com/riyajstar07",
-        github: "",
+        github: "https://github.com/riyajstar07",
       },
     },
     {
@@ -62,7 +62,7 @@ function OrganisersAndActingGenerals() {
         linkedin:
           "https://www.linkedin.com/in/deepanshu-kaushik-174059297/",
         twitter: "https://x.com/Deepanshu25u",
-        github: "",
+        github: "https://github.com/Deepanshu-ui-dev",
       },
     },
     {
