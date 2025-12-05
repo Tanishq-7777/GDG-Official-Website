@@ -1,118 +1,142 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import StatsSection from "./StatsSection";
 
-const CardContainer = ({ children, className = "" }) => {
-  const containerRef = useRef(null);
-  const [rotateX, setRotateX] = useState(0);
-  const [rotateY, setRotateY] = useState(0);
-
-  const handleMouseMove = (e) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    setRotateY(((x - centerX) / centerX) * 10);
-    setRotateX(((centerY - y) / centerY) * 10);
-  };
-
-  const handleMouseLeave = () => {
-    setRotateX(0);
-    setRotateY(0);
-  };
-
-  return (
-    <div
-      ref={containerRef}
-      className={`perspective-1000 ${className}`}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{ perspective: "1000px" }}
-    >
-      <div
-        style={{
-          transform: `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
-          transition: "transform 0.1s ease-out",
-          transformStyle: "preserve-3d",
-        }}
-      >
-        {children}
-      </div>
-    </div>
-  );
-};
-
-const CardBody = ({ children, className = "" }) => {
-  return <div className={className}>{children}</div>;
-};
-
-const CardItem = ({ children, translateZ = 0 }) => {
-  return (
-    <div
-      style={{
-        transform: `translateZ(${translateZ}px)`,
-        transformStyle: "preserve-3d",
-      }}
-    >
-      {children}
-    </div>
-  );
-};
-
 export default function About() {
   useEffect(() => {
     AOS.init({
-      duration: 800,
+      duration: 1000,
       easing: "ease-out-cubic",
       once: false,
-      offset: 150,
+      offset: 100,
     });
   }, []);
 
   return (
     <>
-      <section id="about" className="min-h-screen bg-[#0a0a0a] py-20 px-6 md:px-12 lg:px-20 relative overflow-hidden">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-6xl md:text-7xl font-bold text-[#e5e5e5] mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-              About{" "}
-              <span className="text-[#4285F4]">
-                Us
-              </span>
-            </h2>
+      <section
+        id="about"
+        className="min-h-screen bg-[#0a0a0a] py-20 px-6 md:px-12 lg:px-20 relative overflow-hidden mb-24"
+      >
+        <div className="max-w-7xl mx-auto">
 
-            <div className="h-[2px] w-64 rounded-full mx-auto bg-[#4285F4]"></div>
+          <div className="mb-6">
+            <p
+              className="text-[#4285F4] text-sm font-semibold uppercase tracking-wider mb-2"
+              style={{ fontFamily: "'Inter', sans-serif" }}
+            >
+              / About Us
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mt-20">
-            <div className="order-2 lg:order-1" data-aos="fade-up">
-              <p className="text-[#a3a3a3] text-left text-lg font-normal leading-relaxed" style={{ fontFamily: "'Inter', sans-serif" }}>
-                Google Developer Groups (GDG) on Campus ABESEC is a vibrant
-                community driven by curiosity, collaboration, and innovation. We
-                bring together passionate developers, designers, and
-                problem-solvers to explore technologies and turn ideas into
-                impactful projects. Through workshops, hackathons, and sessions,
-                GDG ABESEC empowers students to learn, build, and grow in a
-                supportive ecosystem bridging classroom learning with real-world
-                experience.
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+         
+            <div className="space-y-8" data-aos="fade-right">
+              
+             
+              <h2
+                className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
+                style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+              >
+                <span className="text-white">Empowering developers</span>
+                <br />
+                <span className="text-[#4285F4]">through innovation</span>
+                <br />
+                <span className="text-white">and collaboration</span>
+              </h2>
+
+              <p
+                className="text-[#a3a3a3] text-lg leading-relaxed max-w-xl"
+                style={{ fontFamily: "'Inter', sans-serif" }}
+              >
+                Google Developer Groups on Campus ABESEC is a vibrant community
+                of passionate developers, designers, and innovators. We bridge
+                the gap between classroom learning and real-world experience
+                through hands-on workshops, exciting hackathons, and
+                collaborative tech sessions.
               </p>
+
+       
+              <div className="flex flex-wrap gap-4">
+                <a
+                  href="/team"
+                  className="group relative px-8 py-3 bg-transparent border-2 border-[#4285F4] text-[#4285F4] font-semibold rounded-lg overflow-hidden cursor-pointer transition-all duration-500 ease-out hover:text-white"
+                  style={{ fontFamily: "'Inter', sans-serif" }}
+                >
+                  <span className="relative z-10">Meet Our Team →</span>
+                  <div className="absolute bottom-0 left-0 w-full h-0 bg-[#1a73e8] group-hover:h-full transition-all duration-500 ease-out"></div>
+                </a>
+
+                <a
+                  href="/events"
+                  className="group relative px-8 py-3 bg-transparent border-2 border-[#34A853] text-[#34A853] font-semibold rounded-lg overflow-hidden cursor-pointer transition-all duration-500 ease-out hover:text-white"
+                  style={{ fontFamily: "'Inter', sans-serif" }}
+                >
+                  <span className="relative z-10">Explore Events →</span>
+                  <div className="absolute bottom-0 left-0 w-full h-0 bg-[#1f8c4c] group-hover:h-full transition-all duration-500 ease-out"></div>
+                </a>
+              </div>
             </div>
 
-            <div className="order-1 lg:order-2" data-aos="fade-up">
-              <CardContainer>
-                <CardBody className="relative rounded-2xl overflow-hidden border border-[#2a2a2a] bg-[#151515] backdrop-blur-sm  transition-all duration-300">
-                  <CardItem translateZ={100}>
-                    <img
-                      src="/about-img1.jpg"
-                      alt="GDG Community"
-                      className="w-full h-80 object-cover rounded-2xl"
-                    />
-                  </CardItem>
-                </CardBody>
-              </CardContainer>
+      
+            <div className="relative h-[600px]" data-aos="fade-left">
+
+           
+              <div
+                className="absolute top-0 left-0 w-[48%] h-[38%] rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-700 ease-out hover:scale-[1.05] cursor-pointer"
+                data-aos="zoom-in"
+                data-aos-delay="100"
+              >
+                <img
+                  src="/image5ForDomeGal.jpg"
+                  alt="Team collaboration"
+                  className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-110"
+                />
+              </div>
+
+          
+              <div
+                className="absolute top-0 right-0 w-[48%] h-[45%] rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-700 ease-out hover:scale-[1.05] cursor-pointer"
+                data-aos="zoom-in"
+                data-aos-delay="200"
+              >
+                <img
+                  src="/hackheaven5.jpeg"
+                  alt="Workshop session"
+                  className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-110"
+                />
+              </div>
+
+        
+              <div
+                className="absolute bottom-0 left-0 w-[48%] h-[45%] rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-700 ease-out hover:scale-[1.05] cursor-pointer"
+                data-aos="zoom-in"
+                data-aos-delay="300"
+              >
+                <img
+                  src="techwinter4.jpeg"
+                  alt="Innovation hub"
+                  className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-110"
+                />
+              </div>
+
+              <div
+                className="absolute bottom-0 right-0 w-[48%] h-[38%] rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-700 ease-out hover:scale-[1.05] cursor-pointer"
+                data-aos="zoom-in"
+                data-aos-delay="400"
+              >
+                <img
+                  src="mtg2.0.jpg"
+                  alt="Developer community"
+                  className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-110"
+                />
+              </div>
+
+           
+              <div className="absolute -top-8 -right-8 w-24 h-24 bg-[#4285F4] opacity-10 rounded-full blur-2xl"></div>
+              <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-[#34A853] opacity-10 rounded-full blur-2xl"></div>
             </div>
           </div>
         </div>
