@@ -1,5 +1,5 @@
 import Navbar from "./ui/Navbar";
-import Squares from "./ui/Squares";
+import CodeFlowLab from "./ui/CodeFlowLab";
 import { motion } from "framer-motion";
 
 const Home = () => {
@@ -7,13 +7,7 @@ const Home = () => {
     <div className="relative min-h-screen bg-black overflow-hidden">
       {/* Animated Background Grid */}
       <div className="absolute inset-0 z-0">
-        <Squares
-          direction="diagonal"
-          speed={0.6}
-          borderColor="#0e071f"
-          squareSize={55}
-          hoverFillColor="#0e071f"
-        />
+        <CodeFlowLab />
       </div>
 
       {/* Branding Section */}
