@@ -5,11 +5,13 @@ import EventHero from "../components/Eventhero";
 
 import DomeGallery from "../components/ui/DomeGalery";
 import CursorTrail from "../components/ui/CursorTrail";
+import ScrollProgressBar from "../components/ScrollProgressBar";
 
 export default function HomePage() {
   return (
     <>
       <div className="w-full  overflow-x-hidden">
+        <ScrollProgressBar />
         <CursorTrail />
         <EventHero />
         <EventsCard />

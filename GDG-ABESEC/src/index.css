@@ -28,3 +28,18 @@ html, body {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
+
+
+body {
+  cursor: none;
+}
+
+button,
+a,
+input,
+textarea,
+select,
+[role="button"],
+.cursor-pointer {
+  cursor: pointer;
+}
