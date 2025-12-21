@@ -27,7 +27,7 @@ const DEFAULT_IMAGES = [
     alt: "Textured surface",
   },
   {
-    src: "image4ForDomeGal.jpg",
+    src: "image6ForDomeGal.jpg",
     alt: "Social media image",
   },
 ];
