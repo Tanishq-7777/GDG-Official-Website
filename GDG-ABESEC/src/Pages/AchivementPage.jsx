@@ -1,7 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github, Linkedin, ExternalLink, ArrowRight, Star, Calendar, Code2 } from 'lucide-react';
+import { Github, Linkedin, ExternalLink, ArrowRight, Star, Calendar, Code2, X } from 'lucide-react';
 import Navbar from "../components/ui/Navbar"; 
+import ScrollProgressBar from '../components/ScrollProgressBar';
+import CursorTrail from '../components/ui/CursorTrail';
 
 
 const mockProjects = [
@@ -10,6 +12,7 @@ const mockProjects = [
     title: 'AI Task Manager',
     description: 'An intelligent task management system with AI-powered suggestions and priority optimization using advanced algorithms.',
     thumbnail_url: 'https://images.pexels.com/photos/3861959/pexels-photo-3861959.jpeg?auto=compress&cs=tinysrgb&w=800',
+    owner_image: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400',
     owner_name: 'John Doe',
     github_url: 'https://github.com/johndoe',
     linkedin_url: 'https://linkedin.com/in/johndoe',
@@ -23,6 +26,7 @@ const mockProjects = [
     title: 'E-Commerce Platform',
     description: 'Full-stack e-commerce solution with seamless payment integration and real-time inventory management system.',
     thumbnail_url: 'https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800',
+    owner_image: 'https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&w=400',
     owner_name: 'Jane Smith',
     github_url: 'https://github.com/janesmith',
     linkedin_url: 'https://linkedin.com/in/janesmith',
@@ -36,6 +40,7 @@ const mockProjects = [
     title: 'Weather Forecast App',
     description: 'Real-time weather application with detailed 7-day forecast and intelligent location-based alert notifications.',
     thumbnail_url: 'https://images.pexels.com/photos/1118873/pexels-photo-1118873.jpeg?auto=compress&cs=tinysrgb&w=800',
+    owner_image: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=400',
     owner_name: 'Mike Johnson',
     github_url: 'https://github.com/mikejohnson',
     linkedin_url: 'https://linkedin.com/in/mikejohnson',
@@ -49,6 +54,7 @@ const mockProjects = [
     title: 'Social Media Dashboard',
     description: 'Comprehensive analytics dashboard for managing multiple social media accounts in one unified platform interface.',
     thumbnail_url: 'https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=800',
+    owner_image: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=400',
     owner_name: 'Sarah Williams',
     github_url: 'https://github.com/sarahwilliams',
     linkedin_url: 'https://linkedin.com/in/sarahwilliams',
@@ -66,6 +72,7 @@ const mockAchievements = [
     subtitle: 'Top 100 Worldwide',
     description: 'Secured top 100 rank in Google Code Jam 2024 competing against 30,000+ participants worldwide in intense competition.',
     image_url: 'https://images.pexels.com/photos/1496192/pexels-photo-1496192.jpeg?auto=compress&cs=tinysrgb&w=800',
+    achiever_image: 'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=400',
     achiever_name: 'Alex Chen',
     github_url: 'https://github.com/alexchen',
     linkedin_url: 'https://linkedin.com/in/alexchen',
@@ -79,6 +86,7 @@ const mockAchievements = [
     subtitle: 'First Place Winner',
     description: 'Won first place at HackMIT 2024 for developing an innovative AI-powered accessibility tool that helps users.',
     image_url: 'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=800',
+    achiever_image: 'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=400',
     achiever_name: 'Emma Davis',
     github_url: 'https://github.com/emmadavis',
     linkedin_url: 'https://linkedin.com/in/emmadavis',
@@ -92,6 +100,7 @@ const mockAchievements = [
     subtitle: 'Rating 2200+',
     description: 'Achieved Master rank on Codeforces with a peak rating of 2200+, demonstrating exceptional competitive programming skills.',
     image_url: 'https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&w=800',
+    achiever_image: 'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=400',
     achiever_name: 'Ryan Lee',
     github_url: 'https://github.com/ryanlee',
     linkedin_url: 'https://linkedin.com/in/ryanlee',
@@ -105,6 +114,7 @@ const mockAchievements = [
     subtitle: 'Finalist',
     description: 'Finalist at ETHGlobal hackathon for building a decentralized voting platform using cutting-edge blockchain technology.',
     image_url: 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=800',
+    achiever_image: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=400',
     achiever_name: 'Sophia Martinez',
     github_url: 'https://github.com/sophiamartinez',
     linkedin_url: 'https://linkedin.com/in/sophiamartinez',
@@ -119,6 +129,8 @@ const Showcase = () => {
 
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
+      <ScrollProgressBar />
+      <CursorTrail />
        <div className="fixed top-4 left-4 md:top-8 md:left-8 z-20 flex flex-col gap-2 pointer-events-none">
         <div className="flex items-center gap-2 pointer-events-auto">
           <img
@@ -145,6 +157,7 @@ const Showcase = () => {
       <style>
         {`
           @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+          @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
           * {
             font-family: 'Inter', sans-serif;
@@ -335,137 +348,225 @@ const ProjectsSection = ({ projects }) => {
 const ProjectCard = ({ project, index }) => {
   const cardRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [imageHovered, setImageHovered] = useState(false);
+  const [isImageEnlarged, setIsImageEnlarged] = useState(false);
 
   return (
-    <motion.div
-      ref={cardRef}
-      initial={{ opacity: 0, y: 60 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8, delay: index * 0.1 }}
-      className="mb-32 last:mb-40"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <div className="grid lg:grid-cols-2 gap-12 items-center">
-        {/* Image Side */}
-        <motion.div 
-          className={`relative overflow-hidden ${index % 2 === 0 ? 'lg:order-1' : 'lg:order-2'}`}
-        >
-          <motion.div
-            animate={{ scale: isHovered ? 0.95 : 1 }}
-            transition={{ duration: 0.6 }}
-            className="relative aspect-[4/3] bg-zinc-900"
-          >
-            <img
-              src={project.thumbnail_url}
-              alt={project.title}
-              className="w-full h-full object-cover"
-            />
+    <>
+      <motion.div
+        ref={cardRef}
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, delay: index * 0.1 }}
+        className="mb-32 last:mb-40"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        style={{ fontFamily: 'Poppins, sans-serif' }}
+      >
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
+          {/* Mobile: Project Number at Top */}
+          <div className="lg:hidden flex items-center gap-4 mb-6">
+            <span className="text-6xl font-black text-white/10">0{project.id}</span>
+            <div className="flex-1 h-px bg-white/20"></div>
+            <span className="text-sm font-semibold tracking-wider text-gray-500">{project.year}</span>
+          </div>
+
+          {/* Content Side - Order 1 on mobile, alternating on desktop */}
+          <div className={`flex flex-col justify-between order-1 ${index % 2 === 0 ? 'lg:order-2' : 'lg:order-1'}`}>
             <motion.div
               initial={{ opacity: 0 }}
-              animate={{ opacity: isHovered ? 1 : 0 }}
-              transition={{ duration: 0.3 }}
-              className="absolute inset-0 bg-black/60 flex items-center justify-center"
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
             >
+              {/* Desktop: Project Number */}
+              <div className="hidden lg:flex items-center gap-4 mb-6">
+                <span className="text-6xl font-black text-white/10">0{project.id}</span>
+                <div className="flex-1 h-px bg-white/20"></div>
+                <span className="text-sm font-semibold tracking-wider text-gray-500">{project.year}</span>
+              </div>
+
+              <h3 className="text-4xl md:text-5xl font-black mb-4 tracking-tight">
+                {project.title}
+              </h3>
+
+              {/* Creator Info with Image */}
+              <div className="flex items-center gap-3 mb-6">
+                <img
+                  src={project.owner_image}
+                  alt={project.owner_name}
+                  className="w-12 h-12 rounded-full object-cover border-2 border-white/20"
+                />
+                <div>
+                  <p className="text-xs font-semibold tracking-wider text-gray-500">CREATED BY</p>
+                  <p className="text-lg font-bold">{project.owner_name}</p>
+                </div>
+              </div>
+
+              <p className="text-gray-400 text-base leading-relaxed mb-8">
+                {project.description}
+              </p>
+
+              {/* Tech Stack */}
+              <div className="mb-10">
+                <p className="text-xs font-semibold tracking-wider text-gray-500 mb-4">TECH STACK</p>
+                <div className="flex flex-wrap gap-3">
+                  {project.tech_stack.map((tech, i) => (
+                    <span
+                      key={i}
+                      className="px-4 py-2 bg-white text-black text-sm font-semibold tracking-wider"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Links */}
+              <div className="flex flex-wrap gap-4">
+                <motion.a
+                  href={project.deployed_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="p-3 bg-white/5 hover:bg-white/10 transition-all duration-300 group"
+                  title="View Live Project"
+                >
+                  <ExternalLink className="w-5 h-5 text-white group-hover:text-white transition-colors" />
+                </motion.a>
+                
+                <motion.a
+                  href={project.github_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="p-3 bg-white/5 hover:bg-purple-600 transition-all duration-300 group"
+                  title="View on GitHub"
+                >
+                  <Github className="w-5 h-5 text-white" />
+                </motion.a>
+                
+                <motion.a
+                  href={project.linkedin_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="p-3 bg-white/5 hover:bg-blue-600 transition-all duration-300 group"
+                  title="View on LinkedIn"
+                >
+                  <Linkedin className="w-5 h-5 text-white" />
+                </motion.a>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Image Side - Order 2 on mobile, alternating on desktop */}
+          <motion.div 
+            className={`relative h-[450px] order-2 ${index % 2 === 0 ? 'lg:order-1' : 'lg:order-2'}`}
+          >
+            {/* Background Cover Image */}
+            <motion.a
+              href={project.deployed_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative block h-full overflow-hidden bg-zinc-900 group cursor-pointer"
+              onMouseEnter={() => setImageHovered(true)}
+              onMouseLeave={() => setImageHovered(false)}
+            >
+              <motion.img
+                src={project.thumbnail_url}
+                alt={project.title}
+                className="w-full h-full object-cover object-center"
+                animate={{ scale: imageHovered ? 1.05 : 1 }}
+                transition={{ duration: 0.6 }}
+              />
+              
               <motion.div
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: isHovered ? 1 : 0.8, opacity: isHovered ? 1 : 0 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: imageHovered ? 1 : 0 }}
                 transition={{ duration: 0.3 }}
-                className="text-center"
+                className="absolute inset-0 bg-black/60 flex items-center justify-center"
               >
-                <Code2 className="w-16 h-16 mx-auto mb-3" />
-                <p className="text-sm font-semibold tracking-wider">VIEW PROJECT</p>
+                <motion.div
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: imageHovered ? 1 : 0.8, opacity: imageHovered ? 1 : 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="text-center"
+                >
+                  <ExternalLink className="w-16 h-16 mx-auto mb-3" />
+                  <p className="text-sm font-semibold tracking-wider">VIEW PROJECT</p>
+                </motion.div>
               </motion.div>
+
+              {/* Status Badge */}
+              <div className="absolute top-6 right-6 bg-white text-black px-4 py-2 text-xs font-bold tracking-wider">
+                {project.status}
+              </div>
+            </motion.a>
+
+            {/* Floating Profile Image - Clickable for enlargement */}
+            <motion.div
+              className="absolute top-3 left-3 w-25 h-25 overflow-hidden bg-zinc-900 border-4 border-black rounded-[50%] z-10 shadow-2xl cursor-pointer"
+              whileHover={{ scale: 1.05, y: -5 }}
+              transition={{ duration: 0.3 }}
+              onClick={() => setIsImageEnlarged(true)}
+            >
+              <img
+                src={project.owner_image}
+                alt={project.owner_name}
+                className="w-full h-full object-cover"
+              />
             </motion.div>
           </motion.div>
-          
-          {/* Status Badge */}
-          <div className="absolute top-6 right-6 bg-white text-black px-4 py-2 text-xs font-bold tracking-wider">
-            {project.status}
-          </div>
-        </motion.div>
+        </div>
+      </motion.div>
 
-        {/* Content Side */}
-        <div className={index % 2 === 0 ? 'lg:order-2' : 'lg:order-1'}>
+      {/* Enlarged Image Modal */}
+      <AnimatePresence>
+        {isImageEnlarged && (
           <motion.div
             initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4"
+            onClick={() => setIsImageEnlarged(false)}
           >
-            <div className="flex items-center gap-4 mb-6">
-              <span className="text-6xl font-black text-white/10">0{project.id}</span>
-              <div className="flex-1 h-px bg-white/20"></div>
-              <span className="text-sm font-semibold tracking-wider text-gray-500">{project.year}</span>
-            </div>
+            <motion.button
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              className="absolute top-8 right-8 p-3 bg-white/10 hover:bg-white/20 rounded-full transition-colors"
+              onClick={() => setIsImageEnlarged(false)}
+            >
+              <X className="w-6 h-6" />
+            </motion.button>
 
-            <h3 className="text-4xl md:text-5xl font-black mb-6 tracking-tight">
-              {project.title}
-            </h3>
-
-            <p className="text-gray-400 text-lg leading-relaxed mb-8">
-              {project.description}
-            </p>
-
-            <div className="mb-8">
-              <p className="text-xs font-semibold tracking-wider text-gray-500 mb-3">CREATOR</p>
-              <p className="text-xl font-bold">{project.owner_name}</p>
-            </div>
-
-            {/* Tech Stack */}
-            <div className="mb-10">
-              <p className="text-xs font-semibold tracking-wider text-gray-500 mb-4">TECH STACK</p>
-              <div className="flex flex-wrap gap-3">
-                {project.tech_stack.map((tech, i) => (
-                  <span
-                    key={i}
-                    className="px-4 py-2 bg-white text-black text-sm font-semibold tracking-wider"
-                  >
-                    {tech}
-                  </span>
-                ))}
+            <motion.div
+              initial={{ scale: 0.5, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.5, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="relative max-w-2xl max-h-[80vh] rounded-lg overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={project.owner_image}
+                alt={project.owner_name}
+                className="w-full h-full object-contain"
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-6">
+                <p className="text-xs font-semibold tracking-wider text-gray-400 mb-1">CREATED BY</p>
+                <p className="text-2xl font-black">{project.owner_name}</p>
               </div>
-            </div>
-
-            {/* Links */}
-            <div className="flex flex-wrap gap-4">
-              <motion.a
-                href={project.deployed_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ x: 5 }}
-                transition={{ duration: 0.2 }}
-                className="flex items-center gap-3 text-white hover:text-gray-300 transition-colors group"
-              >
-                <span className="text-sm font-semibold tracking-wider">VIEW LIVE</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </motion.a>
-              
-              <motion.a
-                href={project.github_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.1 }}
-                className="p-3 border border-white/20 hover:border-white/40 transition-colors"
-              >
-                <Github className="w-5 h-5" />
-              </motion.a>
-              
-              <motion.a
-                href={project.linkedin_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.1 }}
-                className="p-3 border border-white/20 hover:border-white/40 transition-colors"
-              >
-                <Linkedin className="w-5 h-5" />
-              </motion.a>
-            </div>
+            </motion.div>
           </motion.div>
-        </div>
-      </div>
-    </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 
@@ -491,57 +592,76 @@ const AchievementsSection = ({ achievements }) => {
 
 const AchievementCard = ({ achievement, index }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [imageHovered, setImageHovered] = useState(false);
+  const [isImageEnlarged, setIsImageEnlarged] = useState(false);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 60 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.7, delay: index * 0.1 }}
-      className="group"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <div className="relative h-full bg-zinc-950 border border-white/10 overflow-hidden">
-        {/* Image Section */}
-        <div className="relative aspect-[16/10] overflow-hidden">
-          <motion.img
-            src={achievement.image_url}
-            alt={achievement.title}
-            className="w-full h-full object-cover"
-            animate={{ scale: isHovered ? 1.05 : 1 }}
-            transition={{ duration: 0.6 }}
-          />
-          
-          {/* Overlay */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: isHovered ? 1 : 0 }}
-            transition={{ duration: 0.3 }}
-            className="absolute inset-0 bg-black/70"
-          />
+    <>
+      <motion.div
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.7, delay: index * 0.1 }}
+        className="group"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        style={{ fontFamily: 'Poppins, sans-serif' }}
+      >
+        <div className="relative h-full bg-zinc-950 overflow-hidden flex flex-col">
+          {/* Image Section - Fixed height */}
+          <div className="relative h-64 overflow-hidden">
+            {/* Background Achievement Cover */}
+            <div 
+              className="relative w-full h-full overflow-hidden cursor-pointer"
+              onMouseEnter={() => setImageHovered(true)}
+              onMouseLeave={() => setImageHovered(false)}
+            >
+              <motion.img
+                src={achievement.image_url}
+                alt={achievement.title}
+                className="w-full h-full object-cover object-center"
+                animate={{ scale: imageHovered ? 1.1 : 1 }}
+                transition={{ duration: 0.6 }}
+              />
+              
+              {/* Overlay on hover */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: imageHovered ? 1 : 0 }}
+                transition={{ duration: 0.3 }}
+                className="absolute inset-0 bg-black/70 flex items-center justify-center"
+              >
+                <div className="bg-white text-black px-6 py-3 text-center">
+                  <Star className="w-8 h-8 mx-auto mb-2" />
+                  <p className="text-xl font-black">{achievement.rank}</p>
+                </div>
+              </motion.div>
 
-          {/* Category Badge */}
-          <div className="absolute top-4 left-4 bg-white text-black px-4 py-2 text-xs font-bold tracking-widest">
-            {achievement.category.toUpperCase()}
+            {/* Category Badge */}
+            <div className="absolute top-4 right-4 bg-white text-black px-3 py-1.5 text-xs font-bold tracking-widest">
+              {achievement.category.toUpperCase()}
+            </div>
           </div>
 
-          {/* Rank Badge */}
+          {/* Floating Profile Image - Top left with higher z-index */}
           <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: isHovered ? 1 : 0.8, opacity: isHovered ? 1 : 0 }}
+            className="absolute top-3 left-3 w-25 h-25 overflow-hidden bg-zinc-900 border-4 border-black rounded-[50%] z-10 shadow-2xl cursor-pointer"
+            whileHover={{ scale: 1.05, y: -5 }}
             transition={{ duration: 0.3 }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+              onClick={() => setIsImageEnlarged(true)}
+
           >
-            <div className="bg-white text-black px-8 py-4 text-center">
-              <Star className="w-8 h-8 mx-auto mb-2" />
-              <p className="text-2xl font-black">{achievement.rank}</p>
-            </div>
+            <img
+              src={achievement.achiever_image}
+              alt={achievement.achiever_name}
+              className="w-full h-full object-cover"
+            />
           </motion.div>
         </div>
 
+
         {/* Content Section */}
-        <div className="p-8">
+        <div className="p-8 bg-zinc-950 flex-1 flex flex-col">
           <h3 className="text-2xl font-black mb-2 tracking-tight">
             {achievement.title}
           </h3>
@@ -549,7 +669,20 @@ const AchievementCard = ({ achievement, index }) => {
             {achievement.subtitle}
           </p>
 
-          <p className="text-gray-400 leading-relaxed mb-6" style={{ fontSize: '0.95rem', fontWeight: 300, lineHeight: 1.6 }}>
+          {/* Achiever Info with Image */}
+          <div className="flex items-center gap-3 mb-4">
+            <img
+              src={achievement.achiever_image}
+              alt={achievement.achiever_name}
+              className="w-10 h-10 rounded-full object-cover border-2 border-white/20"
+            />
+            <div>
+              <p className="text-xs font-semibold tracking-wider text-gray-500">ACHIEVED BY</p>
+              <p className="text-base font-bold">{achievement.achiever_name}</p>
+            </div>
+          </div>
+
+          <p className="text-gray-400 leading-relaxed mb-6" style={{ fontSize: '0.9rem', fontWeight: 300, lineHeight: 1.6 }}>
             {achievement.description}
           </p>
 
@@ -564,20 +697,16 @@ const AchievementCard = ({ achievement, index }) => {
             </span>
           </div>
 
-          <div className="border-t border-white/10 pt-6 flex items-center justify-between">
-            <div>
-              <p className="text-xs font-semibold tracking-wider text-gray-500 mb-1">ACHIEVED BY</p>
-              <p className="text-lg font-bold">{achievement.achiever_name}</p>
-            </div>
-
+          <div className="border-t border-white/10 pt-6 flex justify-end mt-auto">
             <div className="flex gap-3">
               <motion.a
                 href={achievement.github_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.1, rotate: 5 }}
+                whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                className="p-2 border border-white/20 hover:border-white/40 transition-colors"
+                className="p-2.5 bg-white/5 hover:bg-purple-600 transition-all duration-300"
+                title="View on GitHub"
               >
                 <Github className="w-4 h-4" />
               </motion.a>
@@ -586,9 +715,10 @@ const AchievementCard = ({ achievement, index }) => {
                 href={achievement.linkedin_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.1, rotate: -5 }}
+                whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                className="p-2 border border-white/20 hover:border-white/40 transition-colors"
+                className="p-2.5 bg-white/5 hover:bg-blue-600 transition-all duration-300"
+                title="View on LinkedIn"
               >
                 <Linkedin className="w-4 h-4" />
               </motion.a>
@@ -597,6 +727,7 @@ const AchievementCard = ({ achievement, index }) => {
         </div>
       </div>
     </motion.div>
+    </>
   );
 };
 
