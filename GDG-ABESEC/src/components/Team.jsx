@@ -478,10 +478,16 @@ const Team = () => {
   return (
     <>
       <style jsx>{`
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * {
+          font-family: 'Inter', sans-serif;
+        }
+        
         .tm-wrapper {
           width: 100%;
           min-height: 100vh;
-          background: #0a0a0a;
+          background: #000;
           position: relative;
         }
         .tm-hero {
@@ -491,74 +497,151 @@ const Team = () => {
           flex-direction: column;
           justify-content: center;
           align-items: center;
-          background: linear-gradient(180deg, #000 0%, #0a0a0a 100%);
+          background: #0a0a0a;
           position: relative;
           padding: 40px;
+          overflow: hidden;
+        }
+        .tm-hero-grid {
+          position: absolute;
+          inset: 0;
+          opacity: 0.1;
+          z-index: 1;
+        }
+        .tm-hero-grid .grid-line-h {
+          position: absolute;
+          left: 0;
+          width: 100%;
+          height: 1px;
+          background: #fff;
+        }
+        .tm-hero-grid .grid-line-v {
+          position: absolute;
+          top: 0;
+          height: 100%;
+          width: 1px;
+          background: #fff;
         }
         .tm-hero-content {
           text-align: center;
-          z-index: 2;
+          z-index: 10;
+          max-width: 6xl;
+          margin: 0 auto;
+        }
+        .tm-hero-badge {
+          display: inline-block;
+          padding: 0.5rem 1rem;
+          background: #fff;
+          color: #000;
+          font-size: 0.875rem;
+          font-weight: 600;
+          letter-spacing: 0.1em;
+          margin-bottom: 2rem;
         }
         .tm-hero-title {
-          font-size: clamp(3rem, 10vw, 8rem);
+          font-size: clamp(3.75rem, 10vw, 9rem);
           font-weight: 900;
           color: #fff;
-          margin: 0;
+          margin: 0 0 2rem 0;
           letter-spacing: -0.05em;
           line-height: 0.95;
           text-transform: uppercase;
+          position: relative;
+          display: inline-block;
           background: linear-gradient(135deg, #fff 0%, #888 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
         }
+        .tm-hero-underline {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          height: 4px;
+          background: #fff;
+          animation: underlineGrow 0.8s ease-out 0.8s forwards;
+          width: 0;
+        }
+        @keyframes underlineGrow {
+          to {
+            width: 100%;
+          }
+        }
         .tm-hero-subtitle {
-          font-size: clamp(1rem, 2vw, 1.5rem);
+          font-size: clamp(1rem, 2vw, 1.25rem);
           color: #666;
-          margin-top: 1.5rem;
+          max-width: 48rem;
+          margin: 0 auto 3rem;
+          line-height: 1.75;
+          font-weight: 300;
           letter-spacing: 0.15em;
           text-transform: uppercase;
-          font-weight: 300;
         }
-        .tm-scroll-indicator {
-          position: absolute;
-          bottom: 60px;
-          left: 50%;
-          transform: translateX(-50%);
+        .tm-hero-scroll {
           display: flex;
-          flex-direction: column;
           align-items: center;
-          gap: 16px;
-          z-index: 2;
-        }
-        .tm-scroll-text {
+          justify-content: center;
+          gap: 0.5rem;
           color: #666;
           font-size: 0.75rem;
+          z-index: 10;
           letter-spacing: 0.2em;
           text-transform: uppercase;
           font-weight: 500;
         }
-        .tm-scroll-arrow {
-          width: 24px;
-          height: 24px;
-          border-bottom: 2px solid #666;
-          border-right: 2px solid #666;
-          transform: rotate(45deg);
-          animation: tm-bounce 2s infinite ease-in-out;
+        .tm-logo-container {
+          position: fixed;
+          top: 1.5rem;
+          left: 1rem;
+          z-index: 200;
+          pointer-events: auto;
         }
-        @keyframes tm-bounce {
-          0%,
-          20%,
-          50%,
-          80%,
-          100% {
-            transform: rotate(45deg) translateY(0);
+        .tm-logo-container img {
+          height: 3rem;
+          width: 3.5rem;
+        }
+        .tm-logo-text-container {
+          position: fixed;
+          top: 5rem;
+          left: 1rem;
+          z-index: 200;
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          font-family: monospace;
+          font-weight: bold;
+          font-size: 1.875rem;
+        }
+        .tm-logo-text-subtitle {
+          position: fixed;
+          color: white;
+          font-size: 1.25rem;
+          top: 7rem;
+          left: 2.5rem;
+          z-index: 200;
+        }
+        @media (min-width: 1024px) {
+          .tm-logo-container {
+            top: 3rem;
+            left: 2rem;
           }
-          40% {
-            transform: rotate(45deg) translateY(12px);
+          .tm-logo-container img {
+            height: 4rem;
+            width: 5rem;
           }
-          60% {
-            transform: rotate(45deg) translateY(6px);
+          .tm-logo-text-container {
+            top: 4rem;
+            left: 8rem;
+            font-size: 2.25rem;
+          }
+          .tm-logo-text-subtitle {
+            font-size: 1.875rem;
+          }
+        }
+        @media (min-width: 768px) {
+          .tm-logo-container img {
+            height: 4rem;
+            width: 5rem;
           }
         }
         .tm-section {
@@ -667,36 +750,74 @@ const Team = () => {
       `}</style>
 
       <div className="tm-wrapper">
-        <div className="relative z-100 pointer-events-none">
+        <div className="tm-logo-container">
           <img
             src="https://www.svgrepo.com/show/353810/google-developers.svg"
-            className="fixed h-12 w-14 md:h-16 md:w-20 top-6 left-4 lg:top-12 lg:left-8 pointer-events-auto"
             alt="gdgLogo"
           />
-          <div className="fixed flex flex-wrap items-center top-20 left-4 lg:top-16 lg:left-32 font-mono font-bold text-3xl md:text-4xl">
-            <span className="text-blue-500">G</span>
-            <span className="text-red-500">o</span>
-            <span className="text-yellow-300">o</span>
-            <span className="text-green-500">g</span>
-            <span className="text-blue-500">l</span>
-            <span className="text-red-500">e</span>
-          </div>
-          <div className="fixed text-white text-xl lg:text-3xl top-28 left-1 ml-9.5">
-            Developers Group
-          </div>
+        </div>
+        <div className="tm-logo-text-container">
+          <span style={{ color: '#3b82f6' }}>G</span>
+          <span style={{ color: '#ef4444' }}>o</span>
+          <span style={{ color: '#fbbf24' }}>o</span>
+          <span style={{ color: '#10b981' }}>g</span>
+          <span style={{ color: '#3b82f6' }}>l</span>
+          <span style={{ color: '#ef4444' }}>e</span>
+        </div>
+        <div className="tm-logo-text-subtitle">
+          Developers Group
         </div>
         <Navbar />
 
         <section className="tm-hero">
-          <div className="tm-hero-content">
-            <h1 className="tm-hero-title">Meet Our Team</h1>
-            <p className="tm-hero-subtitle">
-              The brilliant minds behind our success
-            </p>
+          {/* Grid Background */}
+          <div className="tm-hero-grid">
+            <div className="grid-line-h" style={{ top: '25%' }}></div>
+            <div className="grid-line-h" style={{ top: '50%' }}></div>
+            <div className="grid-line-h" style={{ top: '75%' }}></div>
+            <div className="grid-line-v" style={{ left: '25%' }}></div>
+            <div className="grid-line-v" style={{ left: '50%' }}></div>
+            <div className="grid-line-v" style={{ left: '75%' }}></div>
           </div>
-          <div className="tm-scroll-indicator">
-            <span className="tm-scroll-text">Scroll down to see our team</span>
-            <div className="tm-scroll-arrow"></div>
+
+          <div className="tm-hero-content">
+            <motion.div
+              initial={{ y: 30, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <span className="tm-hero-badge">THE BRILLIANT MINDS</span>
+            </motion.div>
+
+            <motion.div
+              initial={{ y: -50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              style={{ display: 'inline-block' }}
+            >
+              <h1 className="tm-hero-title">
+                MEET OUR TEAM
+                <div className="tm-hero-underline"></div>
+              </h1>
+            </motion.div>
+
+            <motion.p
+              initial={{ y: 30, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="tm-hero-subtitle"
+            >
+              The brilliant minds behind our success
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+              className="tm-hero-scroll"
+            >
+              <span>Scroll down to explore</span>
+            </motion.div>
           </div>
         </section>
 
