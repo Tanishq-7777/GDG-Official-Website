@@ -1,6 +1,5 @@
-// components/ui/Navbar.jsx
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   IconHome,
@@ -26,7 +25,9 @@ function cn(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-// -------------------- Floating Dock Navbar --------------------
+/* ============================================================
+   Floating Dock Wrapper
+============================================================ */
 
 export const FloatingDock = ({ items, desktopClassName, mobileClassName }) => {
   return (
@@ -37,87 +38,99 @@ export const FloatingDock = ({ items, desktopClassName, mobileClassName }) => {
   );
 };
 
-// -------------------- Mobile Hamburger Dock --------------------
+/* ============================================================
+   MOBILE FULLSCREEN HAMBURGER NAVBAR
+============================================================ */
 
-const FloatingDockMobile = ({ items, className }) => {
+const FloatingDockMobile = ({ items }) => {
   const [open, setOpen] = useState(false);
 
-  return (
-    // Changed z-50 to z-[100] for mobile menu
-    <div className={cn("fixed top-4 right-4 z-[100] block lg:hidden", className)}>
-      {/* Hamburger Button */}
-      <button
-        onClick={() => setOpen(!open)}
-        className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-50 dark:bg-neutral-900 shadow-lg hover:shadow-xl transition-shadow"
-      >
-        <AnimatePresence mode="wait">
-          {open ? (
-            <motion.div
-              key="close"
-              initial={{ rotate: -90, opacity: 0 }}
-              animate={{ rotate: 0, opacity: 1 }}
-              exit={{ rotate: 90, opacity: 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              <IconX className="h-6 w-6 text-neutral-700 dark:text-neutral-200" />
-            </motion.div>
-          ) : (
-            <motion.div
-              key="menu"
-              initial={{ rotate: 90, opacity: 0 }}
-              animate={{ rotate: 0, opacity: 1 }}
-              exit={{ rotate: -90, opacity: 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              <IconMenu2 className="h-6 w-6 text-neutral-700 dark:text-neutral-200" />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </button>
+  // Disable body scroll when menu open
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => (document.body.style.overflow = "");
+  }, [open]);
 
-      {/* Menu Items */}
+  return (
+    <>
+      {/* Toggle Button (☰ / ❌) */}
+      <div className="fixed top-4 right-4 z-[120] block lg:hidden">
+        <button
+          onClick={() => setOpen((prev) => !prev)}
+          className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-50 dark:bg-neutral-900 shadow-lg"
+        >
+          <AnimatePresence mode="wait">
+            {open ? (
+              <motion.div
+                key="close"
+                initial={{ rotate: -90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: 90, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                <IconX className="h-6 w-6 text-neutral-700 dark:text-neutral-200" />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="menu"
+                initial={{ rotate: 90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: -90, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                <IconMenu2 className="h-6 w-6 text-neutral-700 dark:text-neutral-200" />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </button>
+      </div>
+
+      {/* Full Screen Overlay Menu */}
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: -10 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="absolute top-14 right-0 w-48 rounded-2xl bg-gray-50 dark:bg-neutral-900 shadow-xl overflow-hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[110] bg-black/90 backdrop-blur-xl flex flex-col"
           >
-            <div className="flex flex-col">
+            {/* Menu Items */}
+            <motion.div
+              initial={{ y: 40, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.1 }}
+              className="flex flex-1 flex-col items-center justify-center gap-7"
+            >
               {items.map((item, idx) => (
                 <MotionLink
                   key={item.title}
                   to={item.href}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ delay: idx * 0.05 }}
                   onClick={() => setOpen(false)}
-                  className="flex items-center gap-3 px-4 py-3 hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors border-b border-gray-200 dark:border-neutral-800 last:border-b-0"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.08 }}
+                  className="flex items-center gap-4 text-white text-2xl font-semibold tracking-wide"
                 >
-                  <div className="h-5 w-5">{item.icon}</div>
-                  <span className="text-sm font-medium text-neutral-700 dark:text-neutral-200">
-                    {item.title}
-                  </span>
+                  <span className="h-7 w-7">{item.icon}</span>
+                  {item.title}
                 </MotionLink>
               ))}
-            </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </>
   );
 };
 
-// -------------------- Desktop Dock with Glass Effect --------------------
+/* ============================================================
+   DESKTOP FLOATING DOCK (UNCHANGED)
+============================================================ */
 
 const FloatingDockDesktop = ({ items, className }) => {
   let mouseX = useMotionValue(Infinity);
 
   return (
-    // Changed z-50 to z-[100] for desktop navbar
     <motion.div
       onMouseMove={(e) => mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
@@ -125,9 +138,6 @@ const FloatingDockDesktop = ({ items, className }) => {
         "fixed mx-auto top-14 left-1/2 z-[100] -translate-x-1/2 transform h-16 items-end gap-4 rounded-2xl px-4 pb-3 hidden lg:flex shadow-2xl backdrop-blur-md bg-white/5 border border-white/10",
         className
       )}
-      style={{
-        boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.37)",
-      }}
     >
       {items.map((item) => (
         <IconContainer mouseX={mouseX} key={item.title} {...item} />
@@ -136,7 +146,9 @@ const FloatingDockDesktop = ({ items, className }) => {
   );
 };
 
-// -------------------- Icon Animation Logic --------------------
+/* ============================================================
+   ICON ANIMATION LOGIC
+============================================================ */
 
 function IconContainer({ mouseX, title, icon, href }) {
   let ref = useRef(null);
@@ -146,35 +158,14 @@ function IconContainer({ mouseX, title, icon, href }) {
     return val - bounds.x - bounds.width / 2;
   });
 
-  let widthTransform = useTransform(distance, [-150, 0, 150], [40, 80, 40]);
-  let heightTransform = useTransform(distance, [-150, 0, 150], [40, 80, 40]);
-  let widthTransformIcon = useTransform(distance, [-150, 0, 150], [20, 40, 20]);
-  let heightTransformIcon = useTransform(
-    distance,
-    [-150, 0, 150],
-    [20, 40, 20]
+  let width = useSpring(useTransform(distance, [-150, 0, 150], [40, 80, 40]));
+  let height = useSpring(useTransform(distance, [-150, 0, 150], [40, 80, 40]));
+  let widthIcon = useSpring(
+    useTransform(distance, [-150, 0, 150], [20, 40, 20])
   );
-
-  let width = useSpring(widthTransform, {
-    mass: 0.1,
-    stiffness: 150,
-    damping: 12,
-  });
-  let height = useSpring(heightTransform, {
-    mass: 0.1,
-    stiffness: 150,
-    damping: 12,
-  });
-  let widthIcon = useSpring(widthTransformIcon, {
-    mass: 0.1,
-    stiffness: 150,
-    damping: 12,
-  });
-  let heightIcon = useSpring(heightTransformIcon, {
-    mass: 0.1,
-    stiffness: 150,
-    damping: 12,
-  });
+  let heightIcon = useSpring(
+    useTransform(distance, [-150, 0, 150], [20, 40, 20])
+  );
 
   const [hovered, setHovered] = useState(false);
 
@@ -185,7 +176,7 @@ function IconContainer({ mouseX, title, icon, href }) {
         style={{ width, height }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className="relative flex aspect-square items-center justify-center rounded-full bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg"
+        className="relative flex aspect-square items-center justify-center rounded-full bg-white/10 backdrop-blur-sm border border-white/20"
       >
         <AnimatePresence>
           {hovered && (
@@ -193,7 +184,7 @@ function IconContainer({ mouseX, title, icon, href }) {
               initial={{ opacity: 0, y: 10, x: "-50%" }}
               animate={{ opacity: 1, y: 0, x: "-50%" }}
               exit={{ opacity: 0, y: 2, x: "-50%" }}
-              className="absolute -top-8 left-1/2 w-fit rounded-md border border-white/20 bg-black/80 backdrop-blur-md px-2 py-0.5 text-xs text-white shadow-md"
+              className="absolute -top-8 left-1/2 rounded-md bg-black/80 px-2 py-0.5 text-xs text-white"
             >
               {title}
             </motion.div>
@@ -210,7 +201,9 @@ function IconContainer({ mouseX, title, icon, href }) {
   );
 }
 
-// -------------------- Navbar Component --------------------
+/* ============================================================
+   NAVBAR EXPORT
+============================================================ */
 
 export default function Navbar() {
   const items = [
@@ -235,7 +228,7 @@ export default function Navbar() {
       href: "/team",
     },
     {
-      title: "Showcase", 
+      title: "Showcase",
       icon: <IconAward className="w-full h-full text-purple-400" />,
       href: "/achievements",
     },
@@ -246,9 +239,5 @@ export default function Navbar() {
     },
   ];
 
-  return (
-    <div className="relative">
-      <FloatingDock items={items} />
-    </div>
-  );
+  return <FloatingDock items={items} />;
 }
