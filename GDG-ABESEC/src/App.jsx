@@ -5,7 +5,7 @@ import HomePage from "./pages/HomePage";
 import EventsPage from "./pages/EventsPage";
 import TeamPage from "./pages/TeamPage";
 import AchivementPage from "./pages/AchivementPage";
-import ContactPage from "./Pages/ContactPage";
+import ContactPage from "./pages/ContactPage";
 
 import ScrollToHash from "./components/ScrollToHash";
 import Loader from "./components/Loader";
