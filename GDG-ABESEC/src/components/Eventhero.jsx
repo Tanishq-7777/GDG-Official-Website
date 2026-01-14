@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Navbar from "./ui/Navbar";
 
 const EventHero = ({ showPast, setShowPast }) => {
+  /* ===== BRANDING SCROLL STATE (ONLY ADDITION) ===== */
+  const [showBrandText, setShowBrandText] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY >= window.innerHeight) {
+        setShowBrandText(false);
+      } else {
+        setShowBrandText(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+  /* ================================================ */
+
   return (
     <>
       <style>
@@ -36,6 +53,8 @@ const EventHero = ({ showPast, setShowPast }) => {
           }
         `}
       </style>
+
+      {/* ===== BRANDING (ONLY CONDITIONAL TEXT) ===== */}
       <div className="fixed top-4 left-4 md:top-8 md:left-8 z-20 flex flex-col gap-2 pointer-events-none">
         <div className="flex items-center gap-2 pointer-events-auto">
           <img
@@ -44,20 +63,25 @@ const EventHero = ({ showPast, setShowPast }) => {
             alt="gdgLogo"
           />
 
-          <div className="flex items-center gap-0.5 font-bold text-xl sm:text-2xl md:text-3xl">
-            <span className="text-blue-500">G</span>
-            <span className="text-red-500">o</span>
-            <span className="text-yellow-300">o</span>
-            <span className="text-green-500">g</span>
-            <span className="text-blue-500">l</span>
-            <span className="text-red-500">e</span>
-          </div>
+          {showBrandText && (
+            <div className="flex items-center gap-0.5 font-bold text-xl sm:text-2xl md:text-3xl">
+              <span className="text-blue-500">G</span>
+              <span className="text-red-500">o</span>
+              <span className="text-yellow-300">o</span>
+              <span className="text-green-500">g</span>
+              <span className="text-blue-500">l</span>
+              <span className="text-red-500">e</span>
+            </div>
+          )}
         </div>
 
-        <div className="text-white text-sm sm:text-base md:text-lg tracking-wide ml-0.5">
-          Developers Group
-        </div>
+        {showBrandText && (
+          <div className="text-white text-sm sm:text-base md:text-lg tracking-wide ml-0.5">
+            Developers Group
+          </div>
+        )}
       </div>
+      {/* ============================================ */}
 
       <motion.section
         initial={{ opacity: 0 }}
@@ -85,37 +109,37 @@ const EventHero = ({ showPast, setShowPast }) => {
               DISCOVER OUR EVENTS
             </span>
           </motion.div>
-          
+
           <motion.h1
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-6xl md:text-8xl lg:text-9xl font-black mb-8 tracking-tighter relative inline-block"
             style={{
-              background: 'linear-gradient(135deg, #fff 0%, #888 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text'
+              background: "linear-gradient(135deg, #fff 0%, #888 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
             }}
           >
             EVENTS
             <motion.div
               initial={{ width: 0 }}
-              animate={{ width: '100%' }}
+              animate={{ width: "100%" }}
               transition={{ duration: 0.8, delay: 0.8 }}
               className="absolute bottom-0 left-0 h-1 bg-white"
             />
           </motion.h1>
-          
+
           <motion.p
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
             className="text-base md:text-xl text-gray-500 max-w-3xl mx-auto mb-12"
             style={{
-              letterSpacing: '0.15em',
-              textTransform: 'uppercase',
-              fontWeight: 300
+              letterSpacing: "0.15em",
+              textTransform: "uppercase",
+              fontWeight: 300,
             }}
           >
             Experiences that inspire learning & innovation
@@ -127,15 +151,15 @@ const EventHero = ({ showPast, setShowPast }) => {
             transition={{ duration: 0.8, delay: 0.8 }}
             className="flex items-center justify-center gap-2 text-gray-500 text-xs"
             style={{
-              letterSpacing: '0.2em',
-              textTransform: 'uppercase',
-              fontWeight: 500
+              letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              fontWeight: 500,
             }}
           >
             <span>Scroll down to explore</span>
           </motion.div>
-        <Navbar />
 
+          <Navbar />
         </div>
       </motion.section>
 
@@ -151,9 +175,7 @@ const EventHero = ({ showPast, setShowPast }) => {
             <button
               onClick={() => setShowPast(false)}
               className={`relative px-10 py-4 text-base font-bold tracking-wider transition-all duration-300 ${
-                !showPast
-                  ? 'text-black'
-                  : 'text-white hover:text-gray-300'
+                !showPast ? "text-black" : "text-white hover:text-gray-300"
               }`}
             >
               {!showPast && (
@@ -165,12 +187,11 @@ const EventHero = ({ showPast, setShowPast }) => {
               )}
               <span className="relative z-0">UPCOMING EVENTS</span>
             </button>
+
             <button
               onClick={() => setShowPast(true)}
               className={`relative px-10 py-4 text-base font-bold tracking-wider transition-all duration-300 ${
-                showPast
-                  ? 'text-black'
-                  : 'text-white hover:text-gray-300'
+                showPast ? "text-black" : "text-white hover:text-gray-300"
               }`}
             >
               {showPast && (
