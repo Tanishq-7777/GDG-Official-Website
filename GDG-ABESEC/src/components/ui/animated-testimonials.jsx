@@ -34,9 +34,9 @@ export const AnimatedTestimonials = ({
   };
   return (
     <div
-      className="mx-auto max-w-sm px-4 py-20 font-sans-serif antialiased md:max-w-4xl md:px-8 lg:px-12">
-      <div className="relative grid grid-cols-1 gap-20 md:grid-cols-2">
-        <div>
+      className="mx-auto max-w-sm px-4 pt-10 pb-10 sm:pt-14 sm:pb-14 font-sans-serif antialiased md:max-w-4xl md:px-8 lg:px-12">
+      <div className="relative grid grid-cols-1 gap-12 lg:gap-20 md:grid-cols-2">
+        <div className="lg:-translate-x-10">
           <div className="relative h-80 w-full">
             <AnimatePresence>
               {testimonials.map((testimonial, index) => (
@@ -81,7 +81,7 @@ export const AnimatedTestimonials = ({
             </AnimatePresence>
           </div>
         </div>
-        <div className="flex flex-col justify-between py-4">
+        <div className="flex flex-col justify-between py-4 min-h-[360px] lg:translate-x-10">
           <motion.div
             key={active}
             initial={{
@@ -132,7 +132,7 @@ export const AnimatedTestimonials = ({
             </motion.p>
           </motion.div>
 
-        <div className="flex justify-center gap-2 mt-6 mb-8 text-3xl">
+        <div className="flex justify-center gap-2 mt-6 mb-1 text-3xl">
         {testimonials[active].socials?.linkedin && (
        <a href={testimonials[active].socials.linkedin}
       target="_blank"
@@ -163,7 +163,7 @@ export const AnimatedTestimonials = ({
   )}
    </div>
 
-          <div className="flex gap-4 pt-12 md:pt-0">
+          <div className="flex justify-center gap-4 pt-0 md:pt-0">
             <button
               onClick={handlePrev}
               className="group/button flex h-7 w-7  cursor-pointer items-center justify-center rounded-full bg-gray-100 dark:bg-neutral-800">

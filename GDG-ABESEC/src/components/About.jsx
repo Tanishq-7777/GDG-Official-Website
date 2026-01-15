@@ -17,8 +17,11 @@ export default function About() {
     <>
       <section
         id="about"
-        className="min-h-screen bg-[#0a0a0a] py-20 px-6 md:px-12 lg:px-20 relative overflow-hidden mb-24"
-      >
+        className="min-h-screen bg-[#0a0a0a] pt-32 pb-20 px-6 md:px-12 lg:px-20 relative overflow-hidden -mt-16 "
+         style={{
+          background: "linear-gradient(to bottom, #080808 0%, #0a0a0a 60%)",
+        }}
+>
         <div className="max-w-7xl mx-auto">
 
           

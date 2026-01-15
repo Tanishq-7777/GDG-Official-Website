@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Navbar from "./ui/Navbar";
 
 const EventHero = ({ showPast, setShowPast }) => {
+  /* ===== BRANDING SCROLL STATE (ONLY ADDITION) ===== */
+  const [showBrandText, setShowBrandText] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY >= window.innerHeight) {
+        setShowBrandText(false);
+      } else {
+        setShowBrandText(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+  /* ================================================ */
+
   return (
     <>
       <style>
@@ -36,6 +53,8 @@ const EventHero = ({ showPast, setShowPast }) => {
           }
         `}
       </style>
+
+      {/* ===== BRANDING (ONLY CONDITIONAL TEXT) ===== */}
       <div className="fixed top-4 left-4 md:top-8 md:left-8 z-20 flex flex-col gap-2 pointer-events-none">
         <div className="flex items-center gap-2 pointer-events-auto">
           <img
@@ -44,20 +63,25 @@ const EventHero = ({ showPast, setShowPast }) => {
             alt="gdgLogo"
           />
 
-          <div className="flex items-center gap-0.5 font-bold text-xl sm:text-2xl md:text-3xl">
-            <span className="text-blue-500">G</span>
-            <span className="text-red-500">o</span>
-            <span className="text-yellow-300">o</span>
-            <span className="text-green-500">g</span>
-            <span className="text-blue-500">l</span>
-            <span className="text-red-500">e</span>
-          </div>
+          {showBrandText && (
+            <div className="flex items-center gap-0.5 font-bold text-xl sm:text-2xl md:text-3xl">
+              <span className="text-blue-500">G</span>
+              <span className="text-red-500">o</span>
+              <span className="text-yellow-300">o</span>
+              <span className="text-green-500">g</span>
+              <span className="text-blue-500">l</span>
+              <span className="text-red-500">e</span>
+            </div>
+          )}
         </div>
 
-        <div className="text-white text-sm sm:text-base md:text-lg tracking-wide ml-0.5">
-          Developers Group
-        </div>
+        {showBrandText && (
+          <div className="text-white text-sm sm:text-base md:text-lg tracking-wide ml-0.5">
+            Developers Group
+          </div>
+        )}
       </div>
+      {/* ============================================ */}
 
       <motion.section
         initial={{ opacity: 0 }}
@@ -109,6 +133,7 @@ const EventHero = ({ showPast, setShowPast }) => {
             />
           </motion.h1>
 
+
           <motion.p
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -136,6 +161,7 @@ const EventHero = ({ showPast, setShowPast }) => {
           >
             <span>Scroll down to explore</span>
           </motion.div>
+
           <Navbar />
         </div>
       </motion.section>
@@ -164,6 +190,7 @@ const EventHero = ({ showPast, setShowPast }) => {
               )}
               <span className="relative z-0">UPCOMING EVENTS</span>
             </button>
+
             <button
               onClick={() => setShowPast(true)}
               className={`relative px-10 py-4 text-base font-bold tracking-wider transition-all duration-300 ${

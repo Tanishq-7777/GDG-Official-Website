@@ -6,7 +6,7 @@ function OrganisersAndActingGenerals() {
   const testimonials = [
     {
       quote:
-        "Leading with vision and purpose. Inspiring teams as a Team Leader and Community Builder to drive innovation and collaboration.",
+        "Leading with vision and purpose. Inspiring teams as a Team Leader and Community Builder to drive innovation and collaboration impactfully.",
       name: "Arya Schwetank",
       designation: "Organizer, GDG ABESEC",
       src: "OrganiserAndAG'sImages/Organiser.jpg",
@@ -84,8 +84,8 @@ function OrganisersAndActingGenerals() {
 
   return (
     <div className="bg-[#0a0a0a] text-white flex flex-col items-center justify-center 
-    py-12 sm:py-16 lg:py-20 px-4 md:px-6 lg:px-8 overflow-hidden">
-      <div className="text-center mt-10 mb-12 w-full px-2">
+    pt-12 pb-3 sm:pt-16 sm:pb-6 lg:pt-20 lg:pb-10 px-4 md:px-6 lg:px-8 overflow-hidden">
+      <div className="text-center mt-10 mb-6 sm:mb-10 w-full px-2">
         <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-[#e5e5e5] mb-4" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
           Meet the Leadership{" "}
           <span className="text-[#4285F4]">
