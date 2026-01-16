@@ -109,12 +109,19 @@ const EventHero = ({ showPast, setShowPast }) => {
               DISCOVER OUR EVENTS
             </span>
           </motion.div>
-
           <motion.h1
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-6xl md:text-8xl lg:text-9xl font-black mb-8 tracking-tighter relative inline-block"
+            className="
+    relative 
+    inline-block 
+    px-4
+    text-6xl md:text-8xl lg:text-9xl 
+    font-black 
+    mb-8 
+    tracking-tighter
+  "
             style={{
               background: "linear-gradient(135deg, #fff 0%, #888 100%)",
               WebkitBackgroundClip: "text",
@@ -123,11 +130,14 @@ const EventHero = ({ showPast, setShowPast }) => {
             }}
           >
             EVENTS
+
+            {/* underline */}
             <motion.div
               initial={{ width: 0 }}
-              animate={{ width: "100%" }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-              className="absolute bottom-0 left-0 h-1 bg-white"
+              animate={{ width: "calc(100% - 2rem)" }}
+              transition={{ duration: 0.5, delay: 0.8 }}
+              className="absolute bottom-0 left-1/2 h-1 bg-white"
+              style={{ transform: "translateX(-50%)" }}
             />
           </motion.h1>
 
@@ -158,8 +168,8 @@ const EventHero = ({ showPast, setShowPast }) => {
           >
             <span>Scroll down to explore</span>
           </motion.div>
+        <Navbar />
 
-          <Navbar />
         </div>
       </motion.section>
 
@@ -175,7 +185,9 @@ const EventHero = ({ showPast, setShowPast }) => {
             <button
               onClick={() => setShowPast(false)}
               className={`relative px-10 py-4 text-base font-bold tracking-wider transition-all duration-300 ${
-                !showPast ? "text-black" : "text-white hover:text-gray-300"
+                !showPast
+                  ? 'text-black'
+                  : 'text-white hover:text-gray-300'
               }`}
             >
               {!showPast && (
@@ -191,7 +203,9 @@ const EventHero = ({ showPast, setShowPast }) => {
             <button
               onClick={() => setShowPast(true)}
               className={`relative px-10 py-4 text-base font-bold tracking-wider transition-all duration-300 ${
-                showPast ? "text-black" : "text-white hover:text-gray-300"
+                showPast
+                  ? 'text-black'
+                  : 'text-white hover:text-gray-300'
               }`}
             >
               {showPast && (
