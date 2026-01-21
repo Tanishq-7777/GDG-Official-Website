@@ -41,9 +41,11 @@ export default async function handler(req, res) {
   <style>
     body { font-family: 'Inter', 'Segoe UI', sans-serif; margin: 0; padding: 20px; background: #0a0a0a; }
     .container { max-width: 600px; margin: 0 auto; background: #151515; border-radius: 16px; overflow: hidden; border: 1px solid #262626; }
-    .header { background: linear-gradient(135deg, #4285F4 0%, #34A853 50%, #FBBC05 75%, #EA4335 100%); padding: 30px; text-align: center; }
-    .header h1 { margin: 0; color: white; font-size: 24px; font-weight: 700; }
-    .header p { margin: 8px 0 0; color: rgba(255,255,255,0.9); font-size: 14px; }
+    .header { background: #0a0a0a; padding: 30px; text-align: center; border-bottom: 1px solid #262626; }
+    .header-dots { display: flex; justify-content: center; gap: 6px; margin-bottom: 16px; }
+    .header-dots span { width: 10px; height: 10px; border-radius: 50%; }
+    .header h1 { margin: 0; color: #e5e5e5; font-size: 22px; font-weight: 600; }
+    .header p { margin: 8px 0 0; color: #737373; font-size: 14px; }
     .content { padding: 30px; }
     .info-box { background: #0a0a0a; border-radius: 12px; padding: 20px; margin: 20px 0; border-left: 4px solid #4285F4; }
     .info-row { display: flex; margin: 12px 0; }
@@ -65,7 +67,13 @@ export default async function handler(req, res) {
 <body>
   <div class="container">
     <div class="header">
-      <h1>📬 New Contact Form Submission</h1>
+      <div class="header-dots">
+        <span class="blue"></span>
+        <span class="red"></span>
+        <span class="yellow"></span>
+        <span class="green"></span>
+      </div>
+      <h1>New Contact Form Submission</h1>
       <p>GDG On Campus ABESEC</p>
     </div>
     <div class="content">
