@@ -13,6 +13,7 @@ import {
 import Navbar from "../components/ui/Navbar";
 import ScrollProgressBar from "../components/ScrollProgressBar";
 import CursorTrail from "../components/ui/CursorTrail";
+import Footer from "../components/Footer";
 
 const mockProjects = [
   {
@@ -52,34 +53,32 @@ const mockProjects = [
 
   {
     id: 3,
-    title: "Weather Forecast App",
+    title: "CampusShield",
     description:
-      "Real-time weather application with detailed 7-day forecast and intelligent location-based alert notifications.",
-    thumbnail_url:
-      "https://images.pexels.com/photos/1118873/pexels-photo-1118873.jpeg?auto=compress&cs=tinysrgb&w=800",
-    owner_image:
-      "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=400",
-    owner_name: "Mike Johnson",
-    github_url: "https://github.com/mikejohnson",
-    linkedin_url: "https://linkedin.com/in/mikejohnson",
-    deployed_url: "https://weatherapp.com",
-    tech_stack: ["Vue.js", "Express", "Weather API", "Redis"],
-  },
-  {
-    id: 4,
-    title: "Social Media Dashboard",
-    description:
-      "Comprehensive analytics dashboard for managing multiple social media accounts in one unified platform interface.",
-    thumbnail_url:
-      "https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=800",
-    owner_image:
-      "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=400",
-    owner_name: "Sarah Williams",
-    github_url: "https://github.com/sarahwilliams",
-    linkedin_url: "https://linkedin.com/in/sarahwilliams",
-    deployed_url: "https://socialdash.com",
-    tech_stack: ["React", "Firebase", "Chart.js", "Tailwind"],
-  },
+      "CampusShield is a secure, anonymous web application designed to facilitate student complaint reporting with comprehensive admin management capabilities. Built with modern web technologies for reliability, security, and user experience.",
+    thumbnail_url: "/projects-imgs/anmol-project.png",
+    owner_image: "/projects-imgs/anmol.jpg",
+    owner_name: "Anmol Anand",
+    github_url: "https://github.com/anandanmol1010/CampusShield",
+    linkedin_url: "https://www.linkedin.com/in/anandanmol1010/",
+    deployed_url: "https://campus--shield.vercel.app/",
+    tech_stack: ["React JS", "Typescript", "Tailwind CSS", "Firebase"],
+  }
+  // {
+  //   id: 4,
+  //   title: "Social Media Dashboard",
+  //   description:
+  //     "Comprehensive analytics dashboard for managing multiple social media accounts in one unified platform interface.",
+  //   thumbnail_url:
+  //     "https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=800",
+  //   owner_image:
+  //     "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=400",
+  //   owner_name: "Sarah Williams",
+  //   github_url: "https://github.com/sarahwilliams",
+  //   linkedin_url: "https://linkedin.com/in/sarahwilliams",
+  //   deployed_url: "https://socialdash.com",
+  //   tech_stack: ["React", "Firebase", "Chart.js", "Tailwind"],
+  // },
 ];
 const mockAchievements = [
   {
@@ -99,10 +98,27 @@ const mockAchievements = [
   },
   {
     id: 2,
-    title: "Problem Solving Milestone",
-    subtitle: "880+ Problems Solved",
+    title: "Smart India Hackathon",
+    subtitle: "Winner of Smart India Hackathon 2025",
     description:
-      "Solved over 880 data structures and algorithm problems across multiple coding platforms, demonstrating strong problem-solving skills, consistency, and deep understanding of core DSA concepts.",
+      "Won Smart India Hackathon 2025, a prestigious national level innovation competition organized by the Government of India, showcasing excellence in problem-solving and technological innovation.",
+    image_url:
+      "/projects-imgs/anmol-achievement.jpg",
+    achiever_image:
+      "/projects-imgs/anmol.jpg",
+    achiever_name: "Anmol Anand",
+    github_url: "https://github.com/anandanmol1010",
+    linkedin_url: "https://www.linkedin.com/in/anandanmol1010/",
+    category: "Competitive Programming",
+    achievement_date: "2025-12-10",
+    rank: "Winner",
+  },
+  {
+    id: 3,
+    title: "Problem Solving Milestone",
+    subtitle: "920+ Problems Solved",
+    description:
+      "Solved over 920 data structures and algorithm problems across multiple coding platforms, demonstrating strong problem-solving skills, consistency, and deep understanding of core DSA concepts.",
     image_url: "/projects-imgs/ayushi-achievement.png",
     achiever_image: "/projects-imgs/ayushi.jpg",
     achiever_name: "Ayushi Jha",
@@ -110,47 +126,41 @@ const mockAchievements = [
     linkedin_url: "https://www.linkedin.com/in/ayushi-jha-482801310/",
     category: "Problem Solving",
     achievement_date: "2025-12-27",
-    rank: "880+ Solved",
+    rank: "920+ Solved",
   },
 
-  {
-    id: 3,
-    title: "Codeforces Master",
-    subtitle: "Rating 2200+",
-    description:
-      "Achieved Master rank on Codeforces with a peak rating of 2200+, demonstrating exceptional competitive programming skills.",
-    image_url:
-      "https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&w=800",
-    achiever_image:
-      "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=400",
-    achiever_name: "Ryan Lee",
-    github_url: "https://github.com/ryanlee",
-    linkedin_url: "https://linkedin.com/in/ryanlee",
-    category: "Competitive Programming",
-    achievement_date: "2024-03-10",
-    rank: "Master",
-  },
-  {
-    id: 4,
-    title: "ETHGlobal",
-    subtitle: "Finalist",
-    description:
-      "Finalist at ETHGlobal hackathon for building a decentralized voting platform using cutting-edge blockchain technology.",
-    image_url:
-      "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=800",
-    achiever_image:
-      "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=400",
-    achiever_name: "Sophia Martinez",
-    github_url: "https://github.com/sophiamartinez",
-    linkedin_url: "https://linkedin.com/in/sophiamartinez",
-    category: "Hackathon",
-    achievement_date: "2024-07-12",
-    rank: "Top 5",
-  },
+  
+  // {
+  //   id: 4,
+  //   title: "ETHGlobal",
+  //   subtitle: "Finalist",
+  //   description:
+  //     "Finalist at ETHGlobal hackathon for building a decentralized voting platform using cutting-edge blockchain technology.",
+  //   image_url:
+  //     "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=800",
+  //   achiever_image:
+  //     "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=400",
+  //   achiever_name: "Sophia Martinez",
+  //   github_url: "https://github.com/sophiamartinez",
+  //   linkedin_url: "https://linkedin.com/in/sophiamartinez",
+  //   category: "Hackathon",
+  //   achievement_date: "2024-07-12",
+  //   rank: "Top 5",
+  // },
 ];
 
 const Showcase = () => {
   const [activeTab, setActiveTab] = useState("projects");
+  const [hideBrandText, setHideBrandText] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      setHideBrandText(window.scrollY >= window.innerHeight);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
@@ -164,7 +174,12 @@ const Showcase = () => {
             alt="gdgLogo"
           />
 
-          <div className="flex items-center gap-0.5 font-bold text-xl sm:text-2xl md:text-3xl">
+          {/* Google Text */}
+          <div
+            className={`flex items-center gap-0.5 font-bold text-xl sm:text-2xl md:text-3xl
+      transition-all duration-500 ease-out
+      ${hideBrandText ? "opacity-0 -translate-x-4" : "opacity-100 translate-x-0"}`}
+          >
             <span className="text-blue-500">G</span>
             <span className="text-red-500">o</span>
             <span className="text-yellow-300">o</span>
@@ -174,7 +189,12 @@ const Showcase = () => {
           </div>
         </div>
 
-        <div className="text-white text-sm sm:text-base md:text-lg tracking-wide ml-0.5">
+        {/* Developers Group */}
+        <div
+          className={`text-white text-sm sm:text-base md:text-lg tracking-wide ml-0.5
+    transition-all duration-500 ease-out
+    ${hideBrandText ? "opacity-0 -translate-y-2" : "opacity-100 translate-y-0"}`}
+        >
           Developers Group
         </div>
       </div>
@@ -347,6 +367,7 @@ const Showcase = () => {
           />
         )}
       </AnimatePresence>
+      <Footer />
     </div>
   );
 };
@@ -365,6 +386,7 @@ const ProjectsSection = ({ projects }) => {
           <ProjectCard key={project.id} project={project} index={index} />
         ))}
       </div>
+      {/* <Footer /> */}
     </motion.div>
   );
 };
@@ -723,7 +745,7 @@ const AchievementCard = ({ achievement, index }) => {
                     year: "numeric",
                     month: "long",
                     day: "numeric",
-                  }
+                  },
                 )}
               </span>
             </div>

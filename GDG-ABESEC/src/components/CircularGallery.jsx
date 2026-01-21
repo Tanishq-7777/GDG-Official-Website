@@ -33,7 +33,7 @@ function createTextTexture(
   gl,
   text,
   font = "bold 30px monospace",
-  color = "black"
+  color = "black",
 ) {
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d");
@@ -77,7 +77,7 @@ class Title {
       this.gl,
       this.text,
       this.font,
-      this.textColor
+      this.textColor,
     );
     const geometry = new Plane(this.gl);
     const program = new Program(this.gl, {
@@ -325,7 +325,7 @@ class App {
       font = "bold 30px Figtree",
       scrollSpeed = 2,
       scrollEase = 0.05,
-    } = {}
+    } = {},
   ) {
     document.documentElement.classList.remove("no-js");
     this.container = container;
@@ -456,7 +456,7 @@ class App {
     this.viewport = { width, height };
     if (this.medias) {
       this.medias.forEach((media) =>
-        media.onResize({ screen: this.screen, viewport: this.viewport })
+        media.onResize({ screen: this.screen, viewport: this.viewport }),
       );
     }
   }
@@ -464,7 +464,7 @@ class App {
     this.scroll.current = lerp(
       this.scroll.current,
       this.scroll.target,
-      this.scroll.ease
+      this.scroll.ease,
     );
     const direction = this.scroll.current > this.scroll.last ? "right" : "left";
     if (this.medias) {
@@ -517,7 +517,7 @@ export default function CircularGallery({
   textColor = "#ffffff",
   borderRadius = 0.05,
   font = "bold 30px Figtree",
-  scrollSpeed = 2,
+  scrollSpeed = 0.9,
   scrollEase = 0.05,
 }) {
   const containerRef = useRef(null);

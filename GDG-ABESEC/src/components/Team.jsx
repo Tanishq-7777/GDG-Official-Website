@@ -191,12 +191,12 @@ const TeamMemberCard = ({ member }) => {
   const scale = useTransform(
     scrollYProgress,
     [0, 0.15, 0.5, 0.85, 1],
-    [0.05, 0.3, 1, 0.3, 0.05]
+    [0.05, 0.3, 1, 0.3, 0.05],
   );
   const opacity = useTransform(
     scrollYProgress,
     [0, 0.15, 0.5, 0.85, 1],
-    [0, 0.5, 1, 0.5, 0]
+    [0, 0.5, 1, 0.5, 0],
   );
 
   return (
@@ -273,7 +273,9 @@ const TeamMemberCard = ({ member }) => {
           object-fit: cover;
           object-position: center top;
           filter: grayscale(100%) brightness(0.65);
-          transition: filter 0.5s ease, transform 0.5s ease;
+          transition:
+            filter 0.5s ease,
+            transform 0.5s ease;
         }
         .tm-card-inner:hover .tm-image {
           filter: grayscale(0%) brightness(1);
@@ -475,15 +477,26 @@ const SectionHeading = ({ title }) => {
 };
 
 const Team = () => {
+  const [hideBrandText, setHideBrandText] = React.useState(false);
+
+  React.useEffect(() => {
+    const onScroll = () => {
+      setHideBrandText(window.scrollY >= window.innerHeight);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <>
       <style jsx>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-        
+        @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+
         * {
-          font-family: 'Inter', sans-serif;
+          font-family: "Inter", sans-serif;
         }
-        
+
         .tm-wrapper {
           width: 100%;
           min-height: 100vh;
@@ -756,28 +769,37 @@ const Team = () => {
             alt="gdgLogo"
           />
         </div>
-        <div className="tm-logo-text-container">
-          <span style={{ color: '#3b82f6' }}>G</span>
-          <span style={{ color: '#ef4444' }}>o</span>
-          <span style={{ color: '#fbbf24' }}>o</span>
-          <span style={{ color: '#10b981' }}>g</span>
-          <span style={{ color: '#3b82f6' }}>l</span>
-          <span style={{ color: '#ef4444' }}>e</span>
+
+        <div
+          className={`tm-logo-text-container transition-all duration-500 ease-out
+  ${hideBrandText ? "opacity-0 -translate-x-4" : "opacity-100 translate-x-0"}`}
+        >
+          <span style={{ color: "#3b82f6" }}>G</span>
+          <span style={{ color: "#ef4444" }}>o</span>
+          <span style={{ color: "#fbbf24" }}>o</span>
+          <span style={{ color: "#10b981" }}>g</span>
+          <span style={{ color: "#3b82f6" }}>l</span>
+          <span style={{ color: "#ef4444" }}>e</span>
         </div>
-        <div className="tm-logo-text-subtitle">
+
+        <div
+          className={`tm-logo-text-subtitle transition-all duration-500 ease-out
+  ${hideBrandText ? "opacity-0 -translate-y-2" : "opacity-100 translate-y-0"}`}
+        >
           Developers Group
         </div>
+
         <Navbar />
 
         <section className="tm-hero">
           {/* Grid Background */}
           <div className="tm-hero-grid">
-            <div className="grid-line-h" style={{ top: '25%' }}></div>
-            <div className="grid-line-h" style={{ top: '50%' }}></div>
-            <div className="grid-line-h" style={{ top: '75%' }}></div>
-            <div className="grid-line-v" style={{ left: '25%' }}></div>
-            <div className="grid-line-v" style={{ left: '50%' }}></div>
-            <div className="grid-line-v" style={{ left: '75%' }}></div>
+            <div className="grid-line-h" style={{ top: "25%" }}></div>
+            <div className="grid-line-h" style={{ top: "50%" }}></div>
+            <div className="grid-line-h" style={{ top: "75%" }}></div>
+            <div className="grid-line-v" style={{ left: "25%" }}></div>
+            <div className="grid-line-v" style={{ left: "50%" }}></div>
+            <div className="grid-line-v" style={{ left: "75%" }}></div>
           </div>
 
           <div className="tm-hero-content">
@@ -793,7 +815,7 @@ const Team = () => {
               initial={{ y: -50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              style={{ display: 'inline-block' }}
+              style={{ display: "inline-block" }}
             >
               <h1 className="tm-hero-title">
                 MEET OUR TEAM

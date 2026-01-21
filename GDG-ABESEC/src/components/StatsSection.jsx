@@ -223,7 +223,7 @@ export default function StatsSection() {
   ];
 
   return (
-    <div ref={containerRef} className="relative min-h-screen">
+    <div ref={containerRef} className="relative min-h-screen hidden md:block">
       <section
         ref={sectionRef}
         className="sticky top-0 min-h-screen bg-[#0a0a0a] py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-12 lg:px-20 overflow-hidden flex items-center justify-center"
