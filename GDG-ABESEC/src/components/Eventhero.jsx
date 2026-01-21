@@ -144,21 +144,23 @@ const EventHero = ({ showPast, setShowPast }) => {
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-6xl md:text-8xl lg:text-9xl font-black mb-8 tracking-tighter relative inline-block"
+            className="text-6xl md:text-8xl lg:text-9xl font-black    mb-8 tracking-tighter relative  inline-block pb-4"
             style={{
               background: "linear-gradient(135deg, #fff 0%, #888 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
             }}
           >
-            EVENTS
+          OUR EVENTS
             <motion.div
               initial={{ width: 0 }}
               animate={{ width: "100%" }}
               transition={{ duration: 0.8, delay: 0.8 }}
-              className="absolute bottom-0 left-0 h-1 bg-white"
+              className="absolute left-0 h-1 bg-white"
+             
             />
           </motion.h1>
+
 
           <motion.p
             initial={{ y: 30, opacity: 0 }}

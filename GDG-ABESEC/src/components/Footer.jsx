@@ -35,33 +35,33 @@ const Footer = () => {
   return (
     <footer className="bg-[#0a0a0a] text-white pt-12 pb-10 w-full flex flex-col items-center">
 
-      {/* SPOTLIGHT SECTION */}
-    <div
-    ref={spotlightRef}
-    className="w-full h-[230px] sm:h-[260px] md:h-[300px] lg:h-[350px] xl:h-[420px] flex items-center justify-center cursor-pointer relative select-none overflow-hidden"
-    onMouseMove={handleMouseMove}
-    onMouseLeave={handleMouseLeave}
-    style={{
-      transition:
-        "mask-image 0.4s ease-out, -webkit-mask-image 0.4s ease-out",
-    }}
-   >
-   <h1
-     className="font-extrabold tracking-widest text-[#2a2a2a] opacity-90 whitespace-nowrap"
-     style={{
-       fontFamily: "'Space Grotesk', sans-serif",
-       fontSize: "clamp(3rem, 12vw, 12rem)", 
-       lineHeight: "1",
-     }}
-   >
-     GDG ABESEC
-   </h1>
-  </div>
+    
+      <div
+        ref={spotlightRef}
+        className="hidden md:flex w-full h-[300px] lg:h-[350px] xl:h-[420px] items-center justify-center cursor-pointer relative select-none overflow-hidden"
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          transition:
+            "mask-image 0.4s ease-out, -webkit-mask-image 0.4s ease-out",
+        }}
+      >
+        <h1
+          className="font-extrabold tracking-widest text-[#2a2a2a] opacity-90 whitespace-nowrap"
+          style={{
+            fontFamily: "'Space Grotesk', sans-serif",
+            fontSize: "clamp(3rem, 12vw, 12rem)", 
+            lineHeight: "1",
+          }}
+        >
+          GDG ABESEC
+        </h1>
+      </div>
 
-      {/* FOOTER MAIN ROW — PERFECTLY ALIGNED CENTERED LINE */}
+   
       <div className="w-full max-w-6xl px-6 mt-10 flex flex-col md:flex-row items-center justify-between gap-8">
 
-        {/* LOGO + TEXT */}
+     
         <div className="flex items-center space-x-3">
           <img src={gdgLogo} alt="GDG Logo" className="h-12 w-auto" />
           <h1
@@ -72,7 +72,6 @@ const Footer = () => {
           </h1>
         </div>
 
-        {/* NAVIGATION */}
         <ul
           className="flex items-center space-x-8 text-[#a3a3a3] text-sm font-medium"
           style={{ fontFamily: "'Inter', sans-serif" }}
@@ -89,7 +88,6 @@ const Footer = () => {
           ))}
         </ul>
 
-        {/* SOCIAL ICONS */}
         <div className="flex items-center space-x-6">
           <a
             href="https://linkedin.com/company/gdg-abesec"
@@ -129,7 +127,6 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* BOTTOM TEXT */}
       <div
         className="w-full border-t border-[#2a2a2a] mt-8 pt-4 text-center text-[#737373] text-sm"
         style={{ fontFamily: "'Inter', sans-serif" }}

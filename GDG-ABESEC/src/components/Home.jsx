@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
+import { useEffect, useState } from "react";
 import Navbar from "./ui/Navbar";
-import Squares from "./ui/Squares";
+import { HeroSection } from "./ui/HeroSection";
 
 const Home = () => {
+  const [showBrandText, setShowBrandText] = useState(true);
+
   const line1Ref = useRef(null);
   const line2Ref = useRef(null);
   const line3Ref = useRef(null);
@@ -122,18 +123,10 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-black overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 z-0">
-        <Squares
-          direction="diagonal"
-          speed={0.6}
-          borderColor="#0e071f"
-          squareSize={55}
-          hoverFillColor="#0e071f"
-        />
-      </div>
+    <div className="relative min-h-screen overflow-hidden">
+      <HeroSection />
 
+      <div className="fixed top-4 left-4 md:top-8 md:left-8 z-50 flex flex-col gap-2 pointer-events-none">
       {/* ================= BRANDING ================= */}
       <div className="fixed top-4 left-4 md:top-8 md:left-8 z-20 flex flex-col gap-2 pointer-events-none">
         <div className="flex items-center gap-2 pointer-events-auto">
