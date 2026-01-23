@@ -12,7 +12,7 @@ export default function HomePage() {
   const [showPast, setShowPast] = useState(true);
   function useIsDesktop() {
     const [isDesktop, setIsDesktop] = useState(
-      () => window.matchMedia("(min-width: 768px)").matches
+      () => window.matchMedia("(min-width: 768px)").matches,
     );
 
     useEffect(() => {
@@ -38,7 +38,13 @@ export default function HomePage() {
           <DomeGallery key="desktop" />
         </div>
       ) : (
-        <div style={{ height: "600px", position: "relative" }}>
+        <div
+          style={{
+            height: "600px",
+            position: "relative",
+            backgroundColor: "black",
+          }}
+        >
           <CircularGallery key="mobile" bend={0} />
         </div>
       )}

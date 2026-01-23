@@ -1,10 +1,19 @@
 import Navbar from "./ui/Navbar";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Tilt from "react-parallax-tilt";
-import { MapPin, Mail, Phone, Send, User, MessageSquare, Loader2 } from "lucide-react";
-import React, { useState } from "react";
+import {
+  MapPin,
+  Mail,
+  Phone,
+  Send,
+  User,
+  MessageSquare,
+  Loader2,
+} from "lucide-react";
+import React, { useState, useEffect } from "react";
 
 export default function Contact() {
+  /* ================= EXISTING LOGIC (UNCHANGED) ================= */
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -28,7 +37,6 @@ export default function Contact() {
       [name]: value,
     });
 
-    // For email: only re-validate if error already exists (after submit was clicked)
     if (name === "email" && errors.email) {
       if (!value.trim() || !validateEmail(value)) {
         setErrors({ ...errors, email: "Please enter a valid email" });
@@ -36,7 +44,6 @@ export default function Contact() {
         setErrors({ ...errors, email: "" });
       }
     } else if (name !== "email") {
-      // For other fields: clear error when user starts typing
       if (errors[name] && value.trim()) {
         setErrors({ ...errors, [name]: "" });
       }
@@ -65,10 +72,10 @@ export default function Contact() {
       setIsLoading(true);
 
       try {
-        const response = await fetch('/api/contact', {
-          method: 'POST',
+        const response = await fetch("/api/contact", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify(formData),
         });
@@ -80,10 +87,12 @@ export default function Contact() {
           setFormData({ name: "", email: "", subject: "", message: "" });
           setTimeout(() => setSubmitted(false), 5000);
         } else {
-          setErrors({ submit: data.error || "Failed to send message. Please try again." });
+          setErrors({
+            submit: data.error || "Failed to send message. Please try again.",
+          });
         }
       } catch (error) {
-        console.error('Error sending message:', error);
+        console.error("Error sending message:", error);
         setErrors({ submit: "Failed to send message. Please try again." });
       } finally {
         setIsLoading(false);
@@ -138,6 +147,42 @@ export default function Contact() {
     },
   };
 
+  /* ================= NEW SCROLL LOGIC ================= */
+  // 1. Branding Visibility State (Visible ONLY when scroll < windowHeight)
+  const [showBrandText, setShowBrandText] = useState(true);
+
+  // 2. Navbar Visibility State (Hide on Down, Show on Up)
+  const [isNavbarVisible, setIsNavbarVisible] = useState(true);
+
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+
+      // Logic A: Branding Text (100vh check)
+      setShowBrandText(currentScrollY < windowHeight);
+
+      // Logic B: Navbar Smart Scroll (Hide Down / Show Up)
+      if (currentScrollY < lastScrollY || currentScrollY < 10) {
+        setIsNavbarVisible(true);
+      } else if (currentScrollY > lastScrollY && currentScrollY > 10) {
+        setIsNavbarVisible(false);
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Shared class for Navbar Animation
+  const navAnimationClass = `transition-transform duration-300 ease-in-out ${
+    isNavbarVisible ? "translate-y-0" : "-translate-y-[250%]"
+  }`;
+
   return (
     <>
       <style>
@@ -172,7 +217,7 @@ export default function Contact() {
         `}
       </style>
 
-      {/* Google Logo - Fixed Position */}
+      {/* ================= UPDATED BRANDING ================= */}
       <div className="fixed top-4 left-4 md:top-8 md:left-8 z-20 flex flex-col gap-2 pointer-events-none">
         <div className="flex items-center gap-2 pointer-events-auto">
           <img
@@ -180,19 +225,45 @@ export default function Contact() {
             className="h-8 w-10 sm:h-12 sm:w-14 md:h-14 md:w-16"
             alt="gdgLogo"
           />
-          <div className="flex items-center gap-0.5 font-bold text-xl sm:text-2xl md:text-3xl">
-            <span className="text-blue-500">G</span>
-            <span className="text-red-500">o</span>
-            <span className="text-yellow-300">o</span>
-            <span className="text-green-500">g</span>
-            <span className="text-blue-500">l</span>
-            <span className="text-red-500">e</span>
-          </div>
+
+          <AnimatePresence>
+            {showBrandText && (
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+                className="flex items-center gap-0.5 font-bold text-xl sm:text-2xl md:text-3xl"
+              >
+                <span className="text-blue-500">G</span>
+                <span className="text-red-500">o</span>
+                <span className="text-yellow-300">o</span>
+                <span className="text-green-500">g</span>
+                <span className="text-blue-500">l</span>
+                <span className="text-red-500">e</span>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
-        <div className="text-white text-sm sm:text-base md:text-lg tracking-wide ml-0.5">
-          Developers Group
-        </div>
+
+        <AnimatePresence>
+          {showBrandText && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="text-white text-sm sm:text-base md:text-lg tracking-wide ml-0.5"
+            >
+              Developers Group
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
+
+      {/* ================= UPDATED NAVBAR ================= */}
+      {/* Moved outside motion.section for correct fixed positioning */}
+      <Navbar className={navAnimationClass} />
 
       {/* Hero Section - PRESERVED EXACTLY */}
       <motion.section
@@ -255,7 +326,8 @@ export default function Contact() {
               fontWeight: 300,
             }}
           >
-            Share your thoughts, questions, or feedback — we'd love to hear it.{" "}
+            Share your thoughts, questions, or feedback — we'd love to hear
+            it.{" "}
           </motion.p>
 
           <motion.div
@@ -271,11 +343,10 @@ export default function Contact() {
           >
             <span>Scroll down to explore</span>
           </motion.div>
-          <Navbar />
         </div>
       </motion.section>
 
-      {/* REDESIGNED CONTACT SECTION */}
+      {/* REDESIGNED CONTACT SECTION (UNCHANGED) */}
       <section className="w-full py-20 bg-[#0a0a0a] text-white">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 md:px-12">
           {/* Section Header */}
@@ -293,7 +364,8 @@ export default function Contact() {
               Let's <span className="text-[#4285F4]">Connect</span>
             </h2>
             <p className="text-[#737373] max-w-2xl mx-auto">
-              Have a question, idea, or just want to say hello? We're always excited to hear from fellow developers and tech enthusiasts.
+              Have a question, idea, or just want to say hello? We're always
+              excited to hear from fellow developers and tech enthusiasts.
             </p>
           </motion.div>
 
@@ -348,12 +420,18 @@ export default function Contact() {
                           <div className="flex-1">
                             <h3
                               className="text-lg font-semibold text-[#e5e5e5] mb-1"
-                              style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                              style={{
+                                fontFamily: "'Space Grotesk', sans-serif",
+                              }}
                             >
                               {info.title}
                             </h3>
-                            <p className="text-[#a3a3a3] font-medium">{info.content}</p>
-                            <p className="text-[#737373] text-sm mt-1">{info.subContent}</p>
+                            <p className="text-[#a3a3a3] font-medium">
+                              {info.content}
+                            </p>
+                            <p className="text-[#737373] text-sm mt-1">
+                              {info.subContent}
+                            </p>
                           </div>
                         </div>
                       </div>
@@ -382,7 +460,8 @@ export default function Contact() {
                     <div
                       className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-700 pointer-events-none rounded-2xl"
                       style={{
-                        background: "radial-gradient(circle at center, #FBBC0518, transparent 70%)",
+                        background:
+                          "radial-gradient(circle at center, #FBBC0518, transparent 70%)",
                       }}
                     />
 
@@ -405,8 +484,12 @@ export default function Contact() {
                         >
                           Response Time
                         </h3>
-                        <p className="text-[#a3a3a3] font-medium">Within 24-48 hours</p>
-                        <p className="text-[#737373] text-sm mt-1">For urgent queries, DM us on socials</p>
+                        <p className="text-[#a3a3a3] font-medium">
+                          Within 24-48 hours
+                        </p>
+                        <p className="text-[#737373] text-sm mt-1">
+                          For urgent queries, DM us on socials
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -426,7 +509,9 @@ export default function Contact() {
                 {/* Subtle corner accent */}
                 <div
                   className="absolute -top-20 -right-20 w-40 h-40 rounded-full blur-3xl opacity-20"
-                  style={{ background: "linear-gradient(135deg, #4285F4, #34A853)" }}
+                  style={{
+                    background: "linear-gradient(135deg, #4285F4, #34A853)",
+                  }}
                 />
 
                 <h2
@@ -460,13 +545,25 @@ export default function Contact() {
                           onBlur={() => setFocusedField(null)}
                           className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-[#0a0a0a] border-2 text-[#e5e5e5] placeholder-[#525252] focus:outline-none transition-all duration-300"
                           style={{
-                            borderColor: errors.name ? "#EA4335" : focusedField === "name" ? "#4285F4" : "#262626",
-                            boxShadow: errors.name ? "0 0 20px #EA433520" : focusedField === "name" ? "0 0 20px #4285F420" : "none",
+                            borderColor: errors.name
+                              ? "#EA4335"
+                              : focusedField === "name"
+                                ? "#4285F4"
+                                : "#262626",
+                            boxShadow: errors.name
+                              ? "0 0 20px #EA433520"
+                              : focusedField === "name"
+                                ? "0 0 20px #4285F420"
+                                : "none",
                           }}
                           placeholder="Your Name"
                         />
                       </div>
-                      {errors.name && <p className="text-[#EA4335] text-sm mt-2">{errors.name}</p>}
+                      {errors.name && (
+                        <p className="text-[#EA4335] text-sm mt-2">
+                          {errors.name}
+                        </p>
+                      )}
                     </div>
 
                     {/* Email Field */}
@@ -487,13 +584,25 @@ export default function Contact() {
                           onBlur={() => setFocusedField(null)}
                           className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-[#0a0a0a] border-2 text-[#e5e5e5] placeholder-[#525252] focus:outline-none transition-all duration-300"
                           style={{
-                            borderColor: errors.email ? "#EA4335" : focusedField === "email" ? "#4285F4" : "#262626",
-                            boxShadow: errors.email ? "0 0 20px #EA433520" : focusedField === "email" ? "0 0 20px #4285F420" : "none",
+                            borderColor: errors.email
+                              ? "#EA4335"
+                              : focusedField === "email"
+                                ? "#4285F4"
+                                : "#262626",
+                            boxShadow: errors.email
+                              ? "0 0 20px #EA433520"
+                              : focusedField === "email"
+                                ? "0 0 20px #4285F420"
+                                : "none",
                           }}
                           placeholder="Your Email"
                         />
                       </div>
-                      {errors.email && <p className="text-[#EA4335] text-sm mt-2">{errors.email}</p>}
+                      {errors.email && (
+                        <p className="text-[#EA4335] text-sm mt-2">
+                          {errors.email}
+                        </p>
+                      )}
                     </div>
                   </div>
 
@@ -515,13 +624,25 @@ export default function Contact() {
                         onBlur={() => setFocusedField(null)}
                         className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-[#0a0a0a] border-2 text-[#e5e5e5] placeholder-[#525252] focus:outline-none transition-all duration-300"
                         style={{
-                          borderColor: errors.subject ? "#EA4335" : focusedField === "subject" ? "#4285F4" : "#262626",
-                          boxShadow: errors.subject ? "0 0 20px #EA433520" : focusedField === "subject" ? "0 0 20px #4285F420" : "none",
+                          borderColor: errors.subject
+                            ? "#EA4335"
+                            : focusedField === "subject"
+                              ? "#4285F4"
+                              : "#262626",
+                          boxShadow: errors.subject
+                            ? "0 0 20px #EA433520"
+                            : focusedField === "subject"
+                              ? "0 0 20px #4285F420"
+                              : "none",
                         }}
                         placeholder="How can we help you?"
                       />
                     </div>
-                    {errors.subject && <p className="text-[#EA4335] text-sm mt-2">{errors.subject}</p>}
+                    {errors.subject && (
+                      <p className="text-[#EA4335] text-sm mt-2">
+                        {errors.subject}
+                      </p>
+                    )}
                   </div>
 
                   {/* Message Field */}
@@ -538,19 +659,31 @@ export default function Contact() {
                       rows="5"
                       className="w-full px-4 py-4 rounded-xl bg-[#0a0a0a] border-2 text-[#e5e5e5] placeholder-[#525252] focus:outline-none transition-all duration-300 resize-none"
                       style={{
-                        borderColor: errors.message ? "#EA4335" : focusedField === "message" ? "#4285F4" : "#262626",
-                        boxShadow: errors.message ? "0 0 20px #EA433520" : focusedField === "message" ? "0 0 20px #4285F420" : "none",
+                        borderColor: errors.message
+                          ? "#EA4335"
+                          : focusedField === "message"
+                            ? "#4285F4"
+                            : "#262626",
+                        boxShadow: errors.message
+                          ? "0 0 20px #EA433520"
+                          : focusedField === "message"
+                            ? "0 0 20px #4285F420"
+                            : "none",
                       }}
                       placeholder="Tell us about your project, idea, or question..."
                     />
-                    {errors.message && <p className="text-[#EA4335] text-sm mt-2">{errors.message}</p>}
+                    {errors.message && (
+                      <p className="text-[#EA4335] text-sm mt-2">
+                        {errors.message}
+                      </p>
+                    )}
                   </div>
 
                   {/* Submit Button - Matching "Meet Our Team" style */}
                   <button
                     onClick={handleSubmit}
                     disabled={isLoading}
-                    className={`group relative w-full md:w-auto px-10 py-4 bg-transparent border-2 border-[#4285F4] text-[#4285F4] font-semibold rounded-lg overflow-hidden transition-all duration-500 ease-out hover:text-white ${isLoading ? 'opacity-70 cursor-not-allowed' : 'cursor-pointer'}`}
+                    className={`group relative w-full md:w-auto px-10 py-4 bg-transparent border-2 border-[#4285F4] text-[#4285F4] font-semibold rounded-lg overflow-hidden transition-all duration-500 ease-out hover:text-white ${isLoading ? "opacity-70 cursor-not-allowed" : "cursor-pointer"}`}
                     style={{ fontFamily: "'Inter', sans-serif" }}
                   >
                     <span className="relative z-10 flex items-center justify-center gap-2">
@@ -593,7 +726,9 @@ export default function Contact() {
                       <div className="w-6 h-6 rounded-full bg-[#34A853]/20 flex items-center justify-center">
                         ✓
                       </div>
-                      <span>Thank you! Your message has been sent successfully.</span>
+                      <span>
+                        Thank you! Your message has been sent successfully.
+                      </span>
                     </motion.div>
                   )}
                 </div>

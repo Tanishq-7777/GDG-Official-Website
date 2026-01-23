@@ -19,15 +19,43 @@ const DEFAULT_IMAGES = [
     alt: "Contemporary art",
   },
   {
-    src: "mtg2.JPG",
-    alt: "Geometric pattern",
-  },
-  {
     src: "hackheaven3.jpg",
     alt: "Textured surface",
   },
   {
     src: "image6ForDomeGal.jpg",
+    alt: "Social media image",
+  },
+  {
+    src: "mtg1.JPG",
+    alt: "Social media image",
+  },
+  {
+    src: "mtg2.JPG",
+    alt: "Social media image",
+  },
+  {
+    src: "mtg3.JPG",
+    alt: "Social media image",
+  },
+  {
+    src: "techwinter1.jpg",
+    alt: "Social media image",
+  },
+  {
+    src: "techwinter2.jpg",
+    alt: "Social media image",
+  },
+  {
+    src: "techwinter3.jpg",
+    alt: "Social media image",
+  },
+  {
+    src: "hackheaven5.jpeg",
+    alt: "Social media image",
+  },
+  {
+    src: "hackheaven4.jpg",
     alt: "Social media image",
   },
 ];
