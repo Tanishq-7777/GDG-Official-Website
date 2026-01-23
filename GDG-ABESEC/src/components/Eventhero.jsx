@@ -3,21 +3,42 @@ import { motion, useAnimation } from "framer-motion";
 import Navbar from "./ui/Navbar";
 
 const EventHero = ({ showPast, setShowPast }) => {
-  /* ===== BRANDING SCROLL STATE ===== */
+  /* ===== STATE MANAGEMENT ===== */
+  // 1. Branding Text State (Visible only before 100vh)
   const [showBrandText, setShowBrandText] = useState(true);
+
+  // 2. Navbar State (Visible on Scroll Up)
+  const [isNavbarVisible, setIsNavbarVisible] = useState(true);
+
   const brandControls = useAnimation();
   const brandSubControls = useAnimation();
 
+  /* ===== SCROLL LISTENER (COMBINED) ===== */
   useEffect(() => {
+    let lastScrollY = window.scrollY;
+
     const handleScroll = () => {
-      setShowBrandText(window.scrollY < window.innerHeight);
+      const currentScrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+
+      // Logic A: Branding Text (100vh check)
+      setShowBrandText(currentScrollY < windowHeight);
+
+      // Logic B: Navbar (Smart Scroll - Hide Down / Show Up)
+      if (currentScrollY < lastScrollY || currentScrollY < 10) {
+        setIsNavbarVisible(true);
+      } else if (currentScrollY > lastScrollY && currentScrollY > 10) {
+        setIsNavbarVisible(false);
+      }
+
+      lastScrollY = currentScrollY;
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  /* ===== BRANDING ANIMATION ===== */
+  /* ===== BRANDING ANIMATION EFFECT ===== */
   useEffect(() => {
     if (showBrandText) {
       brandControls.start({
@@ -45,6 +66,11 @@ const EventHero = ({ showPast, setShowPast }) => {
       });
     }
   }, [showBrandText, brandControls, brandSubControls]);
+
+  // Navbar Animation Class
+  const navAnimationClass = `transition-transform duration-300 ease-in-out ${
+    isNavbarVisible ? "translate-y-0" : "-translate-y-[250%]"
+  }`;
 
   return (
     <>
@@ -80,7 +106,7 @@ const EventHero = ({ showPast, setShowPast }) => {
         `}
       </style>
 
-      {/* ================= BRANDING ================= */}
+      {/* ================= BRANDING (Fixed Top Left) ================= */}
       <div className="fixed top-4 left-4 md:top-8 md:left-8 z-20 flex flex-col gap-2 pointer-events-none">
         <div className="flex items-center gap-2 pointer-events-auto">
           <img
@@ -112,6 +138,11 @@ const EventHero = ({ showPast, setShowPast }) => {
         </motion.div>
       </div>
 
+      {/* ================= NAVBAR (Smart Scroll) ================= */}
+      {/* Moved outside the section to handle fixed positioning cleanly */}
+      <Navbar className={navAnimationClass} />
+
+      {/* ================= HERO SECTION ================= */}
       <motion.section
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -149,17 +180,15 @@ const EventHero = ({ showPast, setShowPast }) => {
               WebkitTextFillColor: "transparent",
             }}
           >
-          OUR EVENTS
+            OUR EVENTS
             <motion.div
               initial={{ width: 0 }}
               animate={{ width: "calc(100% - 2rem)" }}
               transition={{ duration: 0.5, delay: 0.8 }}
               className="absolute bottom-0 left-1/2 h-1 bg-white"
               style={{ transform: "translateX(-50%)" }}
-             
             />
           </motion.h1>
-
 
           <motion.p
             initial={{ y: 30, opacity: 0 }}
@@ -178,62 +207,8 @@ const EventHero = ({ showPast, setShowPast }) => {
           >
             Scroll down to explore
           </motion.div>
-          <Navbar />
-
         </div>
       </motion.section>
-
-      {/* <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="sticky top-0 z-0 bg-black/80 backdrop-blur-xl border-b border-white/10"
-      >
-        <div className="container mx-auto px-4 py-8">
-          <div className="flex justify-center gap-2">
-            <button
-              onClick={() => setShowPast(false)}
-              className={`relative px-10 py-4 text-base font-bold tracking-wider transition-all duration-300 ${!showPast
-                ? 'text-black'
-                : 'text-white hover:text-gray-300'
-                }`}
-              className={`relative px-10 py-4 font-bold tracking-wider ${
-                !showPast ? "text-black" : "text-white hover:text-gray-300"
-              }`}
-            >
-              {!showPast && (
-                <motion.div
-                  layoutId="activeEventTab"
-                  className="absolute inset-0 bg-white"
-                  transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                />
-              )}
-              <span className="relative z-10">UPCOMING EVENTS</span>
-            </button>
-
-            <button
-              onClick={() => setShowPast(true)}
-              className={`relative px-10 py-4 text-base font-bold tracking-wider transition-all duration-300 ${showPast
-                ? 'text-black'
-                : 'text-white hover:text-gray-300'
-                }`}
-              className={`relative px-10 py-4 font-bold tracking-wider ${
-                showPast ? "text-black" : "text-white hover:text-gray-300"
-              }`}
-            >
-              {showPast && (
-                <motion.div
-                  layoutId="activeEventTab"
-                  className="absolute inset-0 bg-white"
-                  transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                />
-              )}
-              <span className="relative z-10">PAST EVENTS</span>
-            </button>
-          </div>
-        </div>
-      </motion.div> */}
     </>
   );
 };

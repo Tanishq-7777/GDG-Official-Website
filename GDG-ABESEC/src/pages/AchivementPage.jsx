@@ -63,22 +63,7 @@ const mockProjects = [
     linkedin_url: "https://www.linkedin.com/in/anandanmol1010/",
     deployed_url: "https://campus--shield.vercel.app/",
     tech_stack: ["React JS", "Typescript", "Tailwind CSS", "Firebase"],
-  }
-  // {
-  //   id: 4,
-  //   title: "Social Media Dashboard",
-  //   description:
-  //     "Comprehensive analytics dashboard for managing multiple social media accounts in one unified platform interface.",
-  //   thumbnail_url:
-  //     "https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=800",
-  //   owner_image:
-  //     "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=400",
-  //   owner_name: "Sarah Williams",
-  //   github_url: "https://github.com/sarahwilliams",
-  //   linkedin_url: "https://linkedin.com/in/sarahwilliams",
-  //   deployed_url: "https://socialdash.com",
-  //   tech_stack: ["React", "Firebase", "Chart.js", "Tailwind"],
-  // },
+  },
 ];
 const mockAchievements = [
   {
@@ -102,10 +87,8 @@ const mockAchievements = [
     subtitle: "Winner of Smart India Hackathon 2025",
     description:
       "Won Smart India Hackathon 2025, a prestigious national level innovation competition organized by the Government of India, showcasing excellence in problem-solving and technological innovation.",
-    image_url:
-      "/projects-imgs/anmol-achievement.jpg",
-    achiever_image:
-      "/projects-imgs/anmol.jpg",
+    image_url: "/projects-imgs/anmol-achievement.jpg",
+    achiever_image: "/projects-imgs/anmol.jpg",
     achiever_name: "Anmol Anand",
     github_url: "https://github.com/anandanmol1010",
     linkedin_url: "https://www.linkedin.com/in/anandanmol1010/",
@@ -128,44 +111,52 @@ const mockAchievements = [
     achievement_date: "2025-12-27",
     rank: "920+ Solved",
   },
-
-  
-  // {
-  //   id: 4,
-  //   title: "ETHGlobal",
-  //   subtitle: "Finalist",
-  //   description:
-  //     "Finalist at ETHGlobal hackathon for building a decentralized voting platform using cutting-edge blockchain technology.",
-  //   image_url:
-  //     "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=800",
-  //   achiever_image:
-  //     "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=400",
-  //   achiever_name: "Sophia Martinez",
-  //   github_url: "https://github.com/sophiamartinez",
-  //   linkedin_url: "https://linkedin.com/in/sophiamartinez",
-  //   category: "Hackathon",
-  //   achievement_date: "2024-07-12",
-  //   rank: "Top 5",
-  // },
 ];
 
 const Showcase = () => {
   const [activeTab, setActiveTab] = useState("projects");
-  const [hideBrandText, setHideBrandText] = useState(false);
+
+  // 1. Branding Visibility State (Visible ONLY when scroll < windowHeight)
+  const [showBrandText, setShowBrandText] = useState(true);
+
+  // 2. Navbar Visibility State (Hide on Down, Show on Up)
+  const [isNavbarVisible, setIsNavbarVisible] = useState(true);
 
   useEffect(() => {
+    let lastScrollY = window.scrollY;
+
     const onScroll = () => {
-      setHideBrandText(window.scrollY >= window.innerHeight);
+      const currentScrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+
+      // Logic A: Branding Text (100vh check)
+      setShowBrandText(currentScrollY < windowHeight);
+
+      // Logic B: Navbar Smart Scroll (Hide Down / Show Up)
+      if (currentScrollY < lastScrollY || currentScrollY < 10) {
+        setIsNavbarVisible(true);
+      } else if (currentScrollY > lastScrollY && currentScrollY > 10) {
+        setIsNavbarVisible(false);
+      }
+
+      lastScrollY = currentScrollY;
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Shared class for Navbar Animation
+  const navAnimationClass = `transition-transform duration-300 ease-in-out ${
+    isNavbarVisible ? "translate-y-0" : "-translate-y-[250%]"
+  }`;
+
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
       <ScrollProgressBar />
       <CursorTrail />
+
+      {/* ================= BRANDING ================= */}
       <div className="fixed top-4 left-4 md:top-8 md:left-8 z-20 flex flex-col gap-2 pointer-events-none">
         <div className="flex items-center gap-2 pointer-events-auto">
           <img
@@ -178,7 +169,7 @@ const Showcase = () => {
           <div
             className={`flex items-center gap-0.5 font-bold text-xl sm:text-2xl md:text-3xl
       transition-all duration-500 ease-out
-      ${hideBrandText ? "opacity-0 -translate-x-4" : "opacity-100 translate-x-0"}`}
+      ${!showBrandText ? "opacity-0 -translate-x-4" : "opacity-100 translate-x-0"}`}
           >
             <span className="text-blue-500">G</span>
             <span className="text-red-500">o</span>
@@ -193,7 +184,7 @@ const Showcase = () => {
         <div
           className={`text-white text-sm sm:text-base md:text-lg tracking-wide ml-0.5
     transition-all duration-500 ease-out
-    ${hideBrandText ? "opacity-0 -translate-y-2" : "opacity-100 translate-y-0"}`}
+    ${!showBrandText ? "opacity-0 -translate-y-2" : "opacity-100 translate-y-0"}`}
         >
           Developers Group
         </div>
@@ -230,6 +221,10 @@ const Showcase = () => {
           }
         `}
       </style>
+
+      {/* ================= NAVBAR ================= */}
+      {/* Moved outside the hero section for better fixed positioning behavior */}
+      <Navbar className={navAnimationClass} />
 
       <motion.section
         initial={{ opacity: 0 }}
@@ -279,7 +274,6 @@ const Showcase = () => {
             }}
           >
             SHOWCASE
-
             {/* underline */}
             <motion.div
               initial={{ width: 0 }}
@@ -317,7 +311,6 @@ const Showcase = () => {
           >
             <span>Scroll down to explore</span>
           </motion.div>
-          <Navbar />
         </div>
       </motion.section>
 
@@ -332,10 +325,11 @@ const Showcase = () => {
           <div className="flex justify-center gap-2">
             <button
               onClick={() => setActiveTab("projects")}
-              className={`relative px-10 py-4 text-base font-bold tracking-wider transition-all duration-300 ${activeTab === "projects"
+              className={`relative px-10 py-4 text-base font-bold tracking-wider transition-all duration-300 ${
+                activeTab === "projects"
                   ? "text-black"
                   : "text-white hover:text-gray-300"
-                }`}
+              }`}
             >
               {activeTab === "projects" && (
                 <motion.div
@@ -348,10 +342,11 @@ const Showcase = () => {
             </button>
             <button
               onClick={() => setActiveTab("achievements")}
-              className={`relative px-10 py-4 text-base font-bold tracking-wider transition-all duration-300 ${activeTab === "achievements"
+              className={`relative px-10 py-4 text-base font-bold tracking-wider transition-all duration-300 ${
+                activeTab === "achievements"
                   ? "text-black"
                   : "text-white hover:text-gray-300"
-                }`}
+              }`}
             >
               {activeTab === "achievements" && (
                 <motion.div
@@ -431,8 +426,9 @@ const ProjectCard = ({ project, index }) => {
           </div>
 
           <div
-            className={`flex flex-col justify-between order-1 ${index % 2 === 0 ? "lg:order-2" : "lg:order-1"
-              }`}
+            className={`flex flex-col justify-between order-1 ${
+              index % 2 === 0 ? "lg:order-2" : "lg:order-1"
+            }`}
           >
             <motion.div
               initial={{ opacity: 0 }}
@@ -526,8 +522,9 @@ const ProjectCard = ({ project, index }) => {
           </div>
 
           <motion.div
-            className={`relative h-[450px] order-2 ${index % 2 === 0 ? "lg:order-1" : "lg:order-2"
-              }`}
+            className={`relative h-[450px] order-2 ${
+              index % 2 === 0 ? "lg:order-1" : "lg:order-2"
+            }`}
           >
             <motion.a
               href={project.deployed_url}

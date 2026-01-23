@@ -1,7 +1,15 @@
-import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import React, { useRef, useState, useEffect } from "react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  AnimatePresence,
+} from "framer-motion";
 import Navbar from "./ui/Navbar";
 
+/* ============================================================
+   TEAM DATA (UNCHANGED)
+============================================================ */
 const teamMembers = {
   organiser: [
     {
@@ -182,6 +190,9 @@ const teamMembers = {
   ],
 };
 
+/* ============================================================
+   TEAM CARD COMPONENT (UNCHANGED)
+============================================================ */
 const TeamMemberCard = ({ member }) => {
   const cardRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -429,6 +440,9 @@ const TeamMemberCard = ({ member }) => {
   );
 };
 
+/* ============================================================
+   SECTION HEADING COMPONENT (UNCHANGED)
+============================================================ */
 const SectionHeading = ({ title }) => {
   const headingRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -476,17 +490,45 @@ const SectionHeading = ({ title }) => {
   );
 };
 
+/* ============================================================
+   MAIN TEAM COMPONENT
+============================================================ */
 const Team = () => {
-  const [hideBrandText, setHideBrandText] = React.useState(false);
+  // 1. Branding Visibility State (Visible ONLY when scroll < windowHeight)
+  const [showBrandText, setShowBrandText] = useState(true);
 
-  React.useEffect(() => {
-    const onScroll = () => {
-      setHideBrandText(window.scrollY >= window.innerHeight);
+  // 2. Navbar Visibility State (Hide on Down, Show on Up)
+  const [isNavbarVisible, setIsNavbarVisible] = useState(true);
+
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+
+      // --- Logic A: Branding Text ---
+      // Show only if within the first screen height
+      setShowBrandText(currentScrollY < windowHeight);
+
+      // --- Logic B: Navbar Smart Scroll ---
+      if (currentScrollY < lastScrollY || currentScrollY < 10) {
+        setIsNavbarVisible(true);
+      } else if (currentScrollY > lastScrollY && currentScrollY > 10) {
+        setIsNavbarVisible(false);
+      }
+
+      lastScrollY = currentScrollY;
     };
 
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Shared class for Navbar Animation
+  const navAnimationClass = `transition-transform duration-300 ease-in-out ${
+    isNavbarVisible ? "translate-y-0" : "-translate-y-[250%]"
+  }`;
 
   return (
     <>
@@ -602,61 +644,6 @@ const Team = () => {
           text-transform: uppercase;
           font-weight: 500;
         }
-        .tm-logo-container {
-          position: fixed;
-          top: 1.5rem;
-          left: 1rem;
-          z-index: 200;
-          pointer-events: auto;
-        }
-        .tm-logo-container img {
-          height: 3rem;
-          width: 3.5rem;
-        }
-        .tm-logo-text-container {
-          position: fixed;
-          top: 5rem;
-          left: 1rem;
-          z-index: 200;
-          display: flex;
-          flex-wrap: wrap;
-          align-items: center;
-          font-family: monospace;
-          font-weight: bold;
-          font-size: 1.875rem;
-        }
-        .tm-logo-text-subtitle {
-          position: fixed;
-          color: white;
-          font-size: 1.25rem;
-          top: 7rem;
-          left: 2.5rem;
-          z-index: 200;
-        }
-        @media (min-width: 1024px) {
-          .tm-logo-container {
-            top: 3rem;
-            left: 2rem;
-          }
-          .tm-logo-container img {
-            height: 4rem;
-            width: 5rem;
-          }
-          .tm-logo-text-container {
-            top: 4rem;
-            left: 8rem;
-            font-size: 2.25rem;
-          }
-          .tm-logo-text-subtitle {
-            font-size: 1.875rem;
-          }
-        }
-        @media (min-width: 768px) {
-          .tm-logo-container img {
-            height: 4rem;
-            width: 5rem;
-          }
-        }
         .tm-section {
           width: 100%;
           min-height: 400vh;
@@ -763,6 +750,7 @@ const Team = () => {
       `}</style>
 
       <div className="tm-wrapper">
+        {/* ================= BRANDING (Matches other pages) ================= */}
         <div className="fixed top-4 left-4 md:top-8 md:left-8 z-20 flex flex-col gap-2 pointer-events-none">
           <div className="flex items-center gap-2 pointer-events-auto">
             <img
@@ -771,34 +759,45 @@ const Team = () => {
               alt="gdgLogo"
             />
 
-            {/* Google Text */}
-            <div
-              className={`flex items-center gap-0.5 font-bold text-xl sm:text-2xl md:text-3xl
-      transition-all duration-500 ease-out
-      ${hideBrandText ? "opacity-0 -translate-x-4" : "opacity-100 translate-x-0"}`}
-            >
-              <span className="text-blue-500">G</span>
-              <span className="text-red-500">o</span>
-              <span className="text-yellow-300">o</span>
-              <span className="text-green-500">g</span>
-              <span className="text-blue-500">l</span>
-              <span className="text-red-500">e</span>
-            </div>
+            {/* Google Text Animation */}
+            <AnimatePresence>
+              {showBrandText && (
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
+                  className="flex items-center gap-0.5 font-bold text-xl sm:text-2xl md:text-3xl"
+                >
+                  <span className="text-blue-500">G</span>
+                  <span className="text-red-500">o</span>
+                  <span className="text-yellow-300">o</span>
+                  <span className="text-green-500">g</span>
+                  <span className="text-blue-500">l</span>
+                  <span className="text-red-500">e</span>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
-          {/* Developers Group */}
-          <div
-            className={`text-white text-sm sm:text-base md:text-lg tracking-wide ml-0.5
-    transition-all duration-500 ease-out
-    ${hideBrandText ? "opacity-0 -translate-y-2" : "opacity-100 translate-y-0"}`}
-          >
-            Developers Group
-          </div>
+          {/* Developers Group Animation */}
+          <AnimatePresence>
+            {showBrandText && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="text-white text-sm sm:text-base md:text-lg tracking-wide ml-0.5"
+              >
+                Developers Group
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
-        <Navbar />
 
-
-
+        {/* ================= NAVBAR (Smart Scroll) ================= */}
+        <Navbar className={navAnimationClass} />
 
         <section className="tm-hero">
           {/* Grid Background */}
@@ -841,7 +840,6 @@ const Team = () => {
               }}
             >
               MEET OUR TEAM
-
               {/* underline */}
               <motion.div
                 initial={{ width: 0 }}

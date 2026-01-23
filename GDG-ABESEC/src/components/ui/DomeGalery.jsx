@@ -19,11 +19,11 @@ const DEFAULT_IMAGES = [
     alt: "Contemporary art",
   },
   {
-    src: "image5ForDomeGal.jpg",
+    src: "mtg2.JPG",
     alt: "Geometric pattern",
   },
   {
-    src: "image5ForDomeGal.jpg",
+    src: "hackheaven3.jpg",
     alt: "Textured surface",
   },
   {
@@ -67,7 +67,7 @@ function buildItems(pool, seg) {
   }
   if (pool.length > totalSlots) {
     console.warn(
-      `[DomeGallery] Provided image count (${pool.length}) exceeds available tiles (${totalSlots}). Some images will not be shown.`
+      `[DomeGallery] Provided image count (${pool.length}) exceeds available tiles (${totalSlots}). Some images will not be shown.`,
     );
   }
 
@@ -80,7 +80,7 @@ function buildItems(pool, seg) {
 
   const usedImages = Array.from(
     { length: totalSlots },
-    (_, i) => normalizedImages[i % normalizedImages.length]
+    (_, i) => normalizedImages[i % normalizedImages.length],
   );
 
   for (let i = 1; i < usedImages.length; i++) {
@@ -216,7 +216,7 @@ export default function DomeGallery({
       root.style.setProperty("--enlarge-radius", openedImageBorderRadius);
       root.style.setProperty(
         "--image-filter",
-        grayscale ? "grayscale(1)" : "none"
+        grayscale ? "grayscale(1)" : "none",
       );
       applyTransform(rotationRef.current.x, rotationRef.current.y);
 
@@ -299,7 +299,7 @@ export default function DomeGallery({
         const nextX = clamp(
           rotationRef.current.x - vY / 200,
           -maxVerticalRotationDeg,
-          maxVerticalRotationDeg
+          maxVerticalRotationDeg,
         );
         const nextY = wrapAngleSigned(rotationRef.current.y + vX / 200);
         rotationRef.current = { x: nextX, y: nextY };
@@ -309,7 +309,7 @@ export default function DomeGallery({
       stopInertia();
       inertiaRAF.current = requestAnimationFrame(step);
     },
-    [dragDampening, maxVerticalRotationDeg, stopInertia]
+    [dragDampening, maxVerticalRotationDeg, stopInertia],
   );
 
   useGesture(
@@ -356,7 +356,7 @@ export default function DomeGallery({
         const nextX = clamp(
           startRotRef.current.x - dyTotal / dragSensitivity,
           -maxVerticalRotationDeg,
-          maxVerticalRotationDeg
+          maxVerticalRotationDeg,
         );
         const nextY = startRotRef.current.y + dxTotal / dragSensitivity;
 
@@ -415,7 +415,7 @@ export default function DomeGallery({
         }
       },
     },
-    { target: mainRef, eventOptions: { passive: false } }
+    { target: mainRef, eventOptions: { passive: false } },
   );
 
   useEffect(() => {
@@ -577,7 +577,7 @@ export default function DomeGallery({
       offsetY,
       sizeX,
       sizeY,
-      segments
+      segments,
     );
     const parentY = normalizeAngle(parentRot.rotateY);
     const globalY = normalizeAngle(rotationRef.current.y);

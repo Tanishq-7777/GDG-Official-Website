@@ -27,25 +27,38 @@ function cn(...classes) {
 
 /* ============================================================
    Floating Dock Wrapper
+   Updated: Accepts className to control visibility
 ============================================================ */
 
-export const FloatingDock = ({ items, desktopClassName, mobileClassName }) => {
+export const FloatingDock = ({
+  items,
+  desktopClassName,
+  mobileClassName,
+  className,
+}) => {
   return (
     <>
-      <FloatingDockDesktop items={items} className={desktopClassName} />
-      <FloatingDockMobile items={items} className={mobileClassName} />
+      {/* Pass the visibility className to both desktop and mobile */}
+      <FloatingDockDesktop
+        items={items}
+        className={cn(desktopClassName, className)}
+      />
+      <FloatingDockMobile
+        items={items}
+        className={cn(mobileClassName, className)}
+      />
     </>
   );
 };
 
 /* ============================================================
    MOBILE FULLSCREEN HAMBURGER NAVBAR
+   Updated: Accepts className for the toggle button
 ============================================================ */
 
-const FloatingDockMobile = ({ items }) => {
+const FloatingDockMobile = ({ items, className }) => {
   const [open, setOpen] = useState(false);
 
-  // Disable body scroll when menu open
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => (document.body.style.overflow = "");
@@ -54,7 +67,10 @@ const FloatingDockMobile = ({ items }) => {
   return (
     <>
       {/* Toggle Button (☰ / ❌) */}
-      <div className="fixed top-4 right-4 z-[120] block lg:hidden">
+      {/* Applied className here so button slides up/down */}
+      <div
+        className={cn("fixed top-4 right-4 z-[120] block lg:hidden", className)}
+      >
         <button
           onClick={() => setOpen((prev) => !prev)}
           className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-50 dark:bg-neutral-900 shadow-lg"
@@ -94,7 +110,6 @@ const FloatingDockMobile = ({ items }) => {
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-[110] bg-black/90 backdrop-blur-xl flex flex-col"
           >
-            {/* Menu Items */}
             <motion.div
               initial={{ y: 40, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -124,7 +139,8 @@ const FloatingDockMobile = ({ items }) => {
 };
 
 /* ============================================================
-   DESKTOP FLOATING DOCK (UNCHANGED)
+   DESKTOP FLOATING DOCK
+   Updated: Ensure it handles the className prop correctly
 ============================================================ */
 
 const FloatingDockDesktop = ({ items, className }) => {
@@ -134,9 +150,10 @@ const FloatingDockDesktop = ({ items, className }) => {
     <motion.div
       onMouseMove={(e) => mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
+      // The className passed from Home will be merged here via cn()
       className={cn(
         "fixed mx-auto top-14 left-1/2 z-[100] -translate-x-1/2 transform h-16 items-end gap-4 rounded-2xl px-4 pb-3 hidden lg:flex shadow-2xl backdrop-blur-md bg-white/5 border border-white/10",
-        className
+        className,
       )}
     >
       {items.map((item) => (
@@ -147,7 +164,7 @@ const FloatingDockDesktop = ({ items, className }) => {
 };
 
 /* ============================================================
-   ICON ANIMATION LOGIC
+   ICON ANIMATION LOGIC (UNCHANGED)
 ============================================================ */
 
 function IconContainer({ mouseX, title, icon, href }) {
@@ -161,10 +178,10 @@ function IconContainer({ mouseX, title, icon, href }) {
   let width = useSpring(useTransform(distance, [-150, 0, 150], [40, 80, 40]));
   let height = useSpring(useTransform(distance, [-150, 0, 150], [40, 80, 40]));
   let widthIcon = useSpring(
-    useTransform(distance, [-150, 0, 150], [20, 40, 20])
+    useTransform(distance, [-150, 0, 150], [20, 40, 20]),
   );
   let heightIcon = useSpring(
-    useTransform(distance, [-150, 0, 150], [20, 40, 20])
+    useTransform(distance, [-150, 0, 150], [20, 40, 20]),
   );
 
   const [hovered, setHovered] = useState(false);
@@ -203,9 +220,10 @@ function IconContainer({ mouseX, title, icon, href }) {
 
 /* ============================================================
    NAVBAR EXPORT
+   Updated: Accepts className prop
 ============================================================ */
 
-export default function Navbar() {
+export default function Navbar({ className }) {
   const items = [
     {
       title: "Home",
@@ -239,5 +257,6 @@ export default function Navbar() {
     },
   ];
 
-  return <FloatingDock items={items} />;
+  // Pass the className prop down to FloatingDock
+  return <FloatingDock items={items} className={className} />;
 }

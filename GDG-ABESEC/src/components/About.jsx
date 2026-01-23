@@ -18,20 +18,13 @@ export default function About() {
       <section
         id="about"
         className="min-h-screen bg-[#0a0a0a] pt-32 pb-20 px-6 md:px-12 lg:px-20 relative overflow-hidden -mt-16 "
-         style={{
+        style={{
           background: "linear-gradient(to bottom, #080808 0%, #0a0a0a 60%)",
         }}
->
+      >
         <div className="max-w-7xl mx-auto">
-
-          
-
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-
-         
             <div className="space-y-8" data-aos="fade-right">
-              
-             
               <h2
                 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
                 style={{ fontFamily: "'Space Grotesk', sans-serif" }}
@@ -54,7 +47,6 @@ export default function About() {
                 collaborative tech sessions.
               </p>
 
-       
               <div className="flex flex-wrap gap-4">
                 <a
                   href="/team"
@@ -76,23 +68,22 @@ export default function About() {
               </div>
             </div>
 
-      
-            <div className="grid grid-cols-2 gap-4 md:gap-6 lg:gap-8" data-aos="fade-left">
-
-           
+            <div
+              className="grid grid-cols-2 gap-4 md:gap-6 lg:gap-8"
+              data-aos="fade-left"
+            >
               <div
                 className="rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-700 ease-out hover:scale-[1.05] cursor-pointer"
                 data-aos="zoom-in"
                 data-aos-delay="100"
               >
                 <img
-                  src="/image5ForDomeGal.jpg"
+                  src="/image4ForDomeGal.jpg"
                   alt="Team collaboration"
                   className="w-full h-48 sm:h-56 md:h-64 lg:h-72 object-cover object-center bg-black transition-transform duration-700 ease-out hover:scale-110"
                 />
               </div>
 
-          
               <div
                 className="rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-700 ease-out hover:scale-[1.05] cursor-pointer"
                 data-aos="zoom-in"
@@ -105,7 +96,6 @@ export default function About() {
                 />
               </div>
 
-        
               <div
                 className="rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-700 ease-out hover:scale-[1.05] cursor-pointer"
                 data-aos="zoom-in"
@@ -130,7 +120,6 @@ export default function About() {
                 />
               </div>
 
-           
               <div className="absolute -top-8 -right-8 w-24 h-24 bg-[#4285F4] opacity-10 rounded-full blur-2xl"></div>
               <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-[#34A853] opacity-10 rounded-full blur-2xl"></div>
             </div>
