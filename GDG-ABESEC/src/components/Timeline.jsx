@@ -375,19 +375,24 @@ const EventsTimelineWithUpcoming = () => {
                       className="relative group"
                       onMouseEnter={() => setHoveredEvent(event.id)}
                       onMouseLeave={() => setHoveredEvent(null)}
+                      onPointerDown={() => {
+                        if (window.innerWidth < 768) {
+                          setHoveredEvent(event.id);
+                        }
+                      }}
                     >
-                      <div className="bg-zinc-900 rounded-2xl overflow-hidden shadow-2xl transform transition-all duration-500 hover:scale-105 border border-zinc-800 hover:border-blue-500/50">
+                      <div className="bg-zinc-900 rounded-2xl overflow-hidden shadow-2xl transform transition-all duration-500 hover:scale-105 border border-zinc-800 hover:border-blue-500/50 relative z-20 max-w-full">
                         <div className="relative h-48 overflow-hidden">
                           <img
                             src={event.coverImage}
                             alt={event.name}
-                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1"
+                            className="w-full h-full object-cover transition-transform duration-700 md:group-hover:scale-110 md:group-hover:rotate-1"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
                         </div>
 
                         <div className="p-6">
-                          <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors duration-300">
+                          <h3 className="text-xl md:text-2xl font-bold text-white mb-2 break-words leading-snug group-hover:text-blue-400 transition-colors duration-300">
                             {event.name}
                           </h3>
                           <div className="flex items-center text-gray-400 mb-3">
@@ -407,7 +412,7 @@ const EventsTimelineWithUpcoming = () => {
                           </div>
 
                           <div
-                            className={`transition-all duration-500 ${hoveredEvent === event.id
+                            className={`transition-all duration-500 opacity-100 translate-y-0 pointer-events-auto md:${hoveredEvent === event.id
                                 ? 'opacity-100 translate-y-0'
                                 : 'opacity-0 translate-y-4 pointer-events-none'
                               }`}

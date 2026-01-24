@@ -114,7 +114,7 @@ const FloatingDockMobile = ({ items, className }) => {
               initial={{ y: 40, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.1 }}
-              className="flex flex-1 flex-col items-center justify-center gap-7"
+              className="flex flex-1 flex-col max-w-xs mx-auto px-8 justify-center gap-7"
             >
               {items.map((item, idx) => (
                 <MotionLink
@@ -124,7 +124,7 @@ const FloatingDockMobile = ({ items, className }) => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: idx * 0.08 }}
-                  className="flex items-center gap-4 text-white text-2xl font-semibold tracking-wide"
+                  className="flex items-center gap-4 text-white text-2xl font-semibold tracking-wide w-full justify-start"
                 >
                   <span className="h-7 w-7">{item.icon}</span>
                   {item.title}
@@ -251,7 +251,7 @@ export default function Navbar({ className }) {
       href: "/achievements",
     },
     {
-      title: "Help",
+      title: "Contact",
       icon: <IconHelpCircle className="w-full h-full text-yellow-400" />,
       href: "/contact",
     },

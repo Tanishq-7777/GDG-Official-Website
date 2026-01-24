@@ -180,13 +180,13 @@ const Showcase = () => {
           </div>
         </div>
 
-        {/* Developers Group */}
+        {/* Developer Groups */}
         <div
           className={`text-white text-sm sm:text-base md:text-lg tracking-wide ml-0.5
     transition-all duration-500 ease-out
     ${!showBrandText ? "opacity-0 -translate-y-2" : "opacity-100 translate-y-0"}`}
         >
-          Developers Group
+          Developer Groups
         </div>
       </div>
 
@@ -273,15 +273,23 @@ const Showcase = () => {
               backgroundClip: "text",
             }}
           >
-            SHOWCASE
-            {/* underline */}
-            <motion.div
-              initial={{ width: 0 }}
-              animate={{ width: "calc(100% - 2rem)" }}
-              transition={{ duration: 0.5, delay: 0.8 }}
-              className="absolute bottom-0 left-1/2 h-1 bg-white"
-              style={{ transform: "translateX(-50%)" }}
-            />
+            <motion.span
+    initial={{ backgroundSize: "0% 4px" }}
+    animate={{ backgroundSize: "100% 4px" }}
+    transition={{ duration: 0.5, delay: 0.8, ease: "easeOut" }}
+    className="
+      inline
+      leading-[1.25]
+      bg-[linear-gradient(#ffffff,#ffffff)]
+      bg-no-repeat
+      bg-[position:50%_100%]
+      pb-1
+      [box-decoration-break:clone]
+      [-webkit-box-decoration-break:clone]
+    "
+  >
+    SHOWCASE
+  </motion.span>
           </motion.h1>
 
           <motion.p

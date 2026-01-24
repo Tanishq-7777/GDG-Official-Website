@@ -126,18 +126,18 @@ const teamMembers = {
     },
     {
       name: "Ayush Jain",
-      role: "Elixer Lead",
+      role: "Elixir Lead",
       description:
-        "A creative mind who adds magic, rhythm and fresh vibes to every moment of Elixer.",
+        "A creative mind who adds magic, rhythm and fresh vibes to every moment of Elixir.",
       img: "/TeamPageImages/Ayush Jain EH.jpg",
       linkedin: "https://www.linkedin.com/in/urayushjain",
       github: "https://github.com/",
     },
     {
       name: "Arpan Pal",
-      role: "Elixer Lead",
+      role: "Elixir Lead",
       description:
-        "A calm creator who blends ideas and meaning to give Elixer its heart and personality.",
+        "A calm creator who blends ideas and meaning to give Elixir its heart and personality.",
       img: "/TeamPageImages/Arpan Pal.jpg",
       linkedin: "https://www.linkedin.com/in/arpan-pal-9357a3310/",
       github: "https://github.com/",
@@ -790,7 +790,7 @@ const Team = () => {
                 transition={{ duration: 0.3, ease: "easeInOut" }}
                 className="text-white text-sm sm:text-base md:text-lg tracking-wide ml-0.5"
               >
-                Developers Group
+                Developer Groups
               </motion.div>
             )}
           </AnimatePresence>
@@ -819,7 +819,7 @@ const Team = () => {
               <span className="tm-hero-badge">THE BRILLIANT MINDS</span>
             </motion.div>
 
-            <motion.h1
+             <motion.h1
               initial={{ y: -50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -839,16 +839,24 @@ const Team = () => {
                 backgroundClip: "text",
               }}
             >
-              MEET OUR TEAM
-              {/* underline */}
-              <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: "calc(100% - 2rem)" }}
-                transition={{ duration: 0.5, delay: 0.8 }}
-                className="absolute bottom-0 left-1/2 h-1 bg-white"
-                style={{ transform: "translateX(-50%)" }}
-              />
-            </motion.h1>
+              <motion.span
+              initial={{ backgroundSize: "0% 4px" }}
+              animate={{ backgroundSize: "100% 4px" }}
+              transition={{ duration: 0.5, delay: 0.8, ease: "easeOut" }}
+              className="
+              inline
+              leading-[1.25]
+              bg-[linear-gradient(#ffffff,#ffffff)]
+              bg-no-repeat
+              bg-[position:50%_100%]
+              pb-1
+              [box-decoration-break:clone]
+              [-webkit-box-decoration-break:clone]
+              "
+              >
+                MEET OUR TEAM
+              </motion.span>
+              </motion.h1>
 
             <motion.p
               initial={{ y: 30, opacity: 0 }}

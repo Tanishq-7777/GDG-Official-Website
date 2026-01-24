@@ -79,7 +79,7 @@ const WhyJoinGDG = () => {
           growth.
         </p>
 
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 items-stretch">
           {cardData.map((card, index) => {
             const isExtraMobile = isMobile && index >= 3;
 
@@ -105,15 +105,17 @@ const WhyJoinGDG = () => {
                       : "0ms",
                 }}
               >
+                <div className="h-full w-full">
                 <Tilt
                   glareEnable={false}
                   tiltMaxAngleX={10}
                   tiltMaxAngleY={10}
                   scale={1.02}
                   transitionSpeed={2500}
+                  className="h-full w-full block"
                 >
                   <div
-                    className="group relative p-7 min-h-[350px] flex flex-col rounded-2xl bg-[#151515] border transition-all duration-700 hover:scale-[1.05] hover:-translate-y-2 overflow-hidden"
+                    className="group relative p-7 h-full min-h-[350px] flex flex-col rounded-2xl bg-[#151515] border transition-all duration-700 hover:scale-[1.05] hover:-translate-y-2 overflow-hidden"
                     style={{
                       borderColor: card.themeHex,
                       boxShadow: `0 4px 24px ${card.themeHex}20`,
@@ -163,6 +165,7 @@ const WhyJoinGDG = () => {
                     </div>
                   </div>
                 </Tilt>
+              </div>
               </div>
             );
           })}

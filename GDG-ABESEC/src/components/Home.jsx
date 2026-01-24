@@ -82,7 +82,7 @@ const Home = () => {
           </AnimatePresence>
         </div>
 
-        {/* Animated "Developers Group" Text */}
+        {/* Animated "Developer Groups" Text */}
         <AnimatePresence>
           {showBrandText && (
             <motion.div
@@ -92,7 +92,7 @@ const Home = () => {
               transition={{ duration: 0.3, ease: "easeInOut" }}
               className="text-white text-sm sm:text-base md:text-lg tracking-wide ml-0.5"
             >
-              Developers Group
+              Developer Groups
             </motion.div>
           )}
         </AnimatePresence>

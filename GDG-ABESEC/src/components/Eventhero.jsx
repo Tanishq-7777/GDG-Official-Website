@@ -134,7 +134,7 @@ const EventHero = ({ showPast, setShowPast }) => {
           animate={brandSubControls}
           className="text-white text-sm sm:text-base md:text-lg tracking-wide ml-0.5"
         >
-          Developers Group
+          Developer Groups
         </motion.div>
       </div>
 
@@ -180,14 +180,23 @@ const EventHero = ({ showPast, setShowPast }) => {
               WebkitTextFillColor: "transparent",
             }}
           >
-            OUR EVENTS
-            <motion.div
-              initial={{ width: 0 }}
-              animate={{ width: "calc(100% - 2rem)" }}
-              transition={{ duration: 0.5, delay: 0.8 }}
-              className="absolute bottom-0 left-1/2 h-1 bg-white"
-              style={{ transform: "translateX(-50%)" }}
-            />
+            <motion.span
+            initial={{ backgroundSize: "0% 4px" }}
+            animate={{ backgroundSize: "100% 4px" }}
+            transition={{ duration: 0.5, delay: 0.8, ease: "easeOut" }}
+            className="
+            inline
+            leading-[1.25]
+            bg-[linear-gradient(#ffffff,#ffffff)]
+            bg-no-repeat
+            bg-[position:50%_100%]
+            pb-1
+            [box-decoration-break:clone]
+            [-webkit-box-decoration-break:clone]
+            "
+            >
+              OUR EVENTS
+              </motion.span>
           </motion.h1>
 
           <motion.p

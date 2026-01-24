@@ -55,24 +55,31 @@ function Footer() {
   ];
 
   return (
-    <footer className="bg-[#0F0F11]/10 relative h-fit rounded-3xl overflow-hidden m-8">
-      <div className="max-w-7xl mx-auto p-14 z-40 relative z-50 text-gray-300">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-8 lg:gap-16 pb-12">
+    <footer className="bg-[#0F0F11]/10 relative h-fit rounded-3xl overflow-hidden mx-2 my-4 sm:mx-4 sm:my-6 md:m-8">
+      <div className="max-w-7xl mx-auto px-3 py-4 sm:px-4 sm:py-7 lg:p-14 relative z-50 text-gray-300">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8 lg:gap-16 pb-3 md:pb-12">
           {/* Brand section */}
-          <div className="flex flex-col space-y-4 md:col-span-2 md:order-1 md:items-center  lg:col-span-1 lg:order-none lg:items-start">
-            <div className="flex items-start space-x-3 md:items-center">
-              <img src="/src/assets/gdg-logo.png" alt="GDG Logo" className="h-10 w-10 object-contain mt-1"/>
-              <div className="leading-tight md:flex md:items-center md:space-x-2 lg:block">
-                <div className="text-2xl font-bold text-white">
-                  Google
-                  </div>
-                  <div className="text-lg font-medium text-gray-300">
-                    Developers Group
+          <div className="flex flex-col space-y-2 md:col-span-2 md:order-1 md:items-center lg:col-span-1 lg:order-none items-center md:items-center lg:items-start text-center lg:text-left mb-6 md:mb-8 lg:mb-0">
+            <div className="flex items-center justify-center lg:justify-start gap-2">
+              <img src="/src/assets/gdg-logo.png" alt="GDG Logo" className="h-7 w-7 sm:h-8 sm:w-8 lg:h-10 lg:w-10 object-contain"/>
+              {/* ONE LINE — Mobile & Tablet */}
+              <span className="text-lg sm:text-xl font-semibold text-white break-words max-w-[98%] text-center lg:hidden">
+                Google Developer Groups
+                </span>
+                
+                {/* TWO LINES — Desktop */}
+                <div className="hidden lg:block leading-tight">
+                  <div className="text-2xl font-bold text-white">
+                    Google
                     </div>
-                    </div>
-                    </div>
+                    <div className="text-lg font-medium text-gray-300">
+                      Developer Groups
+                      </div>
+                      </div>
+                      </div>
 
-            <p className="text-sm leading-relaxed md:text-center lg:text-left">
+
+            <p className="text-sm leading-snug md:leading-relaxed md:text-center lg:text-left">
               A community of developers passionate about Google technologies and building innovative solutions.
             </p>
           </div>
@@ -80,7 +87,7 @@ function Footer() {
           {/* Footer link sections */}
           {footerLinks.map((section) => (
             <div key={section.title} className="mx-auto w-fit md:order-2 lg:order-none">
-              <h4 className="text-white text-lg font-semibold mb-6 text-center">
+              <h4 className="text-white text-lg font-semibold mb-2 md:mb-6 text-center">
                 {section.title}
               </h4>
               <ul className="grid grid-cols-2 gap-x-8 gap-y-3">
@@ -94,7 +101,7 @@ function Footer() {
                         ) : (
                     <Link
                       to={link.href}
-                      className="text-gray-300 hover:text-[#3ca2fa] transition-colors"
+                      className="text-gray-300 hover:text-[#3ca2fa] transition-colors whitespace-nowrap"
                     >
                       {link.label}
                     </Link>
@@ -110,10 +117,10 @@ function Footer() {
 
           {/* Contact section */}
           <div className="md:order-3 lg:order-none">
-            <h4 className="text-white text-lg font-semibold mb-6">
+            <h4 className="text-white text-lg font-semibold mb-6 text-center lg:text-left">
               Contact Us
             </h4>
-            <ul className="space-y-4">
+            <ul className="space-y-1.5 flex flex-col items-center md:items-start">
               {contactInfo.map((item, i) => (
                 <li key={i} className="flex items-center space-x-3">
                   {item.icon}
@@ -125,7 +132,7 @@ function Footer() {
                       {item.text}
                     </a>
                   ) : (
-                    <span className="hover:text-[#3ca2fa] transition-colors">
+                    <span className="hover:text-[#3ca2fa] transition-colors text-sm break-words max-w-[98%]">
                       {item.text}
                     </span>
                   )}
@@ -135,12 +142,12 @@ function Footer() {
           </div>
         </div>
 
-        <hr className="border-t border-gray-700 my-8" />
+        <hr className="border-t border-gray-700 my-3 sm:my-6" />
 
         {/* Footer bottom */}
-        <div className="flex flex-col md:flex-row justify-between items-center text-sm space-y-4 md:space-y-0">
+        <div className="flex flex-col md:flex-row justify-between items-center text-sm space-y-1 md:space-y-0">
           {/* Social icons */}
-          <div className="flex space-x-6">
+          <div className="flex space-x-3">
             {socialLinks.map(({ icon, label, href, hoverColor }) => (
               <a
                 key={label}

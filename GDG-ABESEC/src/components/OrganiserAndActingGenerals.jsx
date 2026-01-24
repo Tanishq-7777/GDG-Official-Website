@@ -100,7 +100,7 @@ function OrganisersAndActingGenerals() {
         <div className="animated-testimonials-container w-full">
           <AnimatedTestimonials
             testimonials={testimonials}
-            autoplay={true}
+            autoplay={false}
             onChange={(index) => setActiveIndex(index)}
             showSocials={true}
           />
