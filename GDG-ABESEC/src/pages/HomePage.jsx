@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import WhyJoinGDG from "../components/WhyJoinGDG";
 import ScrollProgressBar from "../components/ScrollProgressBar";
 import CursorTrail from "../components/ui/CursorTrail";
+import AnimatedIconsSection from "../components/AnimatedIconsSection";
 
 export default function HomePage() {
   return (
@@ -18,6 +19,7 @@ export default function HomePage() {
         {/* <WhatWeOffer /> */}
         <OrganisersAndActingGenerals />
         <WhyJoinGDG />
+        <AnimatedIconsSection />
         <Footer />
       </div>
     </>

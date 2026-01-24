@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion"; // Import Framer Motion
 import Navbar from "./ui/Navbar";
 import { HeroSection } from "./ui/HeroSection";
+import logo from "/logo.png";
 
 const Home = () => {
   // 1. State for Branding Text (Visible only before 100vh)
@@ -55,11 +56,11 @@ const Home = () => {
       <div className="fixed top-4 left-4 md:top-8 md:left-8 z-50 flex flex-col gap-2 pointer-events-none">
         <div className="flex items-center gap-2 pointer-events-auto">
           {/* Logo Image (Always Visible) */}
-          <img
-            src="https://www.svgrepo.com/show/353810/google-developers.svg"
-            className="h-8 w-10 sm:h-12 sm:w-14 md:h-14 md:w-16"
-            alt="gdgLogo"
-          />
+           <img
+                        src={logo}
+                        className="h-8 w-10 sm:h-12 sm:w-14 md:h-14 md:w-20"
+                        alt="gdgLogo"
+                      />
 
           {/* Animated "Google" Text */}
           <AnimatePresence>

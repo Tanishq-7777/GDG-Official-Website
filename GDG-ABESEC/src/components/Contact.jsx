@@ -11,6 +11,7 @@ import {
   Loader2,
 } from "lucide-react";
 import React, { useState, useEffect } from "react";
+import logo from "/logo.png";
 
 export default function Contact() {
   /* ================= EXISTING LOGIC (UNCHANGED) ================= */
@@ -220,11 +221,11 @@ export default function Contact() {
       {/* ================= UPDATED BRANDING ================= */}
       <div className="fixed top-4 left-4 md:top-8 md:left-8 z-20 flex flex-col gap-2 pointer-events-none">
         <div className="flex items-center gap-2 pointer-events-auto">
-          <img
-            src="https://www.svgrepo.com/show/353810/google-developers.svg"
-            className="h-8 w-10 sm:h-12 sm:w-14 md:h-14 md:w-16"
-            alt="gdgLogo"
-          />
+           <img
+                                  src={logo}
+                                  className="h-8 w-10 sm:h-12 sm:w-14 md:h-14 md:w-20"
+                                  alt="gdgLogo"
+                                />
 
           <AnimatePresence>
             {showBrandText && (

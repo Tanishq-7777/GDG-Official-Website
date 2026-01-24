@@ -15,6 +15,10 @@ const colors = {
   900: "#1a1d18",
 };
 
+const blueAccent = {
+  500: "#4a6fa5",
+};
+
 export function HeroSection() {
   const gradientRef = useRef(null);
 
@@ -74,7 +78,7 @@ export function HeroSection() {
 
     words.forEach((word) => {
       word.addEventListener("mouseenter", () => {
-        word.style.textShadow = "0 0 20px rgba(200, 180, 160, 0.5)";
+        word.style.textShadow = "0 0 20px rgba(74, 111, 165, 0.5)";
       });
       word.addEventListener("mouseleave", () => {
         word.style.textShadow = "none";
@@ -88,7 +92,7 @@ export function HeroSection() {
       ripple.style.top = e.clientY + "px";
       ripple.style.width = "4px";
       ripple.style.height = "4px";
-      ripple.style.background = "rgba(200, 180, 160, 0.6)";
+      ripple.style.background = "rgba(74, 111, 165, 0.6)";
       ripple.style.borderRadius = "50%";
       ripple.style.transform = "translate(-50%, -50%)";
       ripple.style.pointerEvents = "none";
@@ -120,14 +124,14 @@ export function HeroSection() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#1a1d18] via-black to-[#2a2e26] text-[#e6e1d7] font-primary overflow-hidden relative w-full">
+    <div className="h-screen mb-18 bg-gradient-to-br from-[#1a1d18] via-black to-[#1a2a3a] text-[#e6e1d7] font-primary  overflow-hidden relative w-full">
       <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
             <path
               d="M 60 0 L 0 0 0 60"
               fill="none"
-              stroke="rgba(200,180,160,0.15)"
+              stroke="rgba(160,180,200,0.15)"
               strokeWidth="0.5"
             />
           </pattern>
@@ -141,7 +145,7 @@ export function HeroSection() {
           className="grid-line" 
           style={{ 
             animationDelay: "0.5s",
-            stroke: `rgba(200,180,160,0.15)`,
+            stroke: `rgba(160,180,200,0.15)`,
             strokeDasharray: "1000",
             strokeDashoffset: "1000",
             opacity: 0,
@@ -156,7 +160,7 @@ export function HeroSection() {
           className="grid-line" 
           style={{ 
             animationDelay: "1s",
-            stroke: `rgba(200,180,160,0.15)`,
+            stroke: `rgba(160,180,200,0.15)`,
             strokeDasharray: "1000",
             strokeDashoffset: "1000",
             opacity: 0,
@@ -171,7 +175,7 @@ export function HeroSection() {
           className="grid-line" 
           style={{ 
             animationDelay: "1.5s",
-            stroke: `rgba(200,180,160,0.15)`,
+            stroke: `rgba(160,180,200,0.15)`,
             strokeDasharray: "1000",
             strokeDashoffset: "1000",
             opacity: 0,
@@ -186,7 +190,7 @@ export function HeroSection() {
           className="grid-line" 
           style={{ 
             animationDelay: "2s",
-            stroke: `rgba(200,180,160,0.15)`,
+            stroke: `rgba(160,180,200,0.15)`,
             strokeDasharray: "1000",
             strokeDashoffset: "1000",
             opacity: 0,
@@ -201,7 +205,7 @@ export function HeroSection() {
           className="grid-line"
           style={{ 
             animationDelay: "2.5s",
-            stroke: `rgba(200,180,160,0.05)`,
+            stroke: `rgba(160,180,200,0.05)`,
             strokeDasharray: "1000",
             strokeDashoffset: "1000",
             opacity: 0,
@@ -216,7 +220,7 @@ export function HeroSection() {
           className="grid-line"
           style={{ 
             animationDelay: "3s",
-            stroke: `rgba(200,180,160,0.05)`,
+            stroke: `rgba(160,180,200,0.05)`,
             strokeDasharray: "1000",
             strokeDashoffset: "1000",
             opacity: 0,
@@ -286,7 +290,7 @@ export function HeroSection() {
       </svg>
 
       <div 
-        className="corner-element top-8 left-8 opacity-0 transition-opacity duration-500" 
+        className="corner-element absolute top-8 left-8 opacity-0 transition-opacity duration-500" 
         style={{ animationDelay: "4s" }}
       >
         <div
@@ -295,7 +299,7 @@ export function HeroSection() {
         ></div>
       </div>
       <div 
-        className="corner-element top-8 right-8 opacity-0 transition-opacity duration-500" 
+        className="corner-element absolute top-8 right-8 opacity-0 transition-opacity duration-500" 
         style={{ animationDelay: "4.2s" }}
       >
         <div
@@ -304,7 +308,7 @@ export function HeroSection() {
         ></div>
       </div>
       <div 
-        className="corner-element bottom-8 left-8 opacity-0 transition-opacity duration-500" 
+        className="corner-element absolute bottom-8 left-8 opacity-0 transition-opacity duration-500" 
         style={{ animationDelay: "4.4s" }}
       >
         <div
@@ -313,7 +317,7 @@ export function HeroSection() {
         ></div>
       </div>
       <div 
-        className="corner-element bottom-8 right-8 opacity-0 transition-opacity duration-500" 
+        className="corner-element absolute bottom-8 right-8 opacity-0 transition-opacity duration-500" 
         style={{ animationDelay: "4.6s" }}
       >
         <div
@@ -328,7 +332,7 @@ export function HeroSection() {
       <div className="floating-element" style={{ top: "75%", left: "90%", animationDelay: "6.5s" }}></div>
 
   <div className="relative z-10 h-full flex flex-col justify-between items-center px-8 py-12 md:px-16 md:py-20">
-  <div className="text-center mt-30 md:mt-0">
+  <div className="text-center mt-30 md:mt-10">
     <h2
       className="text-xs md:text-sm font-mono font-light mt-10 md:mt-12 uppercase tracking-[0.2em] opacity-80"
       style={{ color: colors[200] }}
@@ -407,18 +411,6 @@ export function HeroSection() {
       </span>{" "}
       <span 
         className="word inline-block" 
-        data-delay="600"
-        style={{
-          opacity: 0,
-          transform: "translateY(20px)",
-          filter: "blur(5px)",
-          transition: "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)"
-        }}
-      >
-        —
-      </span>{" "}
-      <span 
-        className="word inline-block" 
         data-delay="700"
         style={{
           opacity: 0,
@@ -474,8 +466,7 @@ export function HeroSection() {
     ></div>
   </div>
 
-  {/* Main headline */}
-  <div className="text-center max-w-4xl mx-auto relative mt-10 md:mt-0">
+  <div className="text-center max-w-4xl mx-auto relative -mt-30 md:mt-0">
     <h1
       className="text-3xl md:text-5xl lg:text-6xl font-extralight leading-tight tracking-tight"
       style={{ color: colors[50] }}
@@ -563,7 +554,7 @@ export function HeroSection() {
             transition: "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)"
           }}
         >
-          Developers
+          Developer
         </span>{" "}
         <span 
           className="word inline-block md:text-[4.4rem]" 
@@ -575,7 +566,7 @@ export function HeroSection() {
             transition: "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)"
           }}
         >
-          Group
+          Groups
         </span>{" "}
         <span 
           className="word inline-block md:text-[4.4rem]" 
@@ -680,18 +671,6 @@ export function HeroSection() {
         </span>{" "}
         <span 
           className="word inline-block" 
-          data-delay="2700"
-          style={{
-            opacity: 0,
-            transform: "translateY(30px)",
-            filter: "blur(8px)",
-            transition: "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)"
-          }}
-        >
-          —
-        </span>{" "}
-        <span 
-          className="word inline-block" 
           data-delay="2800"
           style={{
             opacity: 0,
@@ -751,7 +730,7 @@ export function HeroSection() {
         ref={gradientRef}
         className="fixed pointer-events-none w-96 h-96 rounded-full blur-3xl transition-all duration-500 ease-out opacity-0"
         style={{
-          background: `radial-gradient(circle, ${colors[500]}0D 0%, transparent 100%)`,
+          background: `radial-gradient(circle, ${blueAccent[500]}0D 0%, transparent 100%)`,
         }}
       ></div>
 

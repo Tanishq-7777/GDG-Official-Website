@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import Navbar from "./ui/Navbar";
+import logo from "/logo.png";
 
 const EventHero = ({ showPast, setShowPast }) => {
   /* ===== STATE MANAGEMENT ===== */
@@ -109,11 +110,11 @@ const EventHero = ({ showPast, setShowPast }) => {
       {/* ================= BRANDING (Fixed Top Left) ================= */}
       <div className="fixed top-4 left-4 md:top-8 md:left-8 z-20 flex flex-col gap-2 pointer-events-none">
         <div className="flex items-center gap-2 pointer-events-auto">
-          <img
-            src="https://www.svgrepo.com/show/353810/google-developers.svg"
-            className="h-8 w-10 sm:h-12 sm:w-14 md:h-14 md:w-16"
-            alt="gdgLogo"
-          />
+           <img
+                                  src={logo}
+                                  className="h-8 w-10 sm:h-12 sm:w-14 md:h-14 md:w-20"
+                                  alt="gdgLogo"
+                                />
 
           <motion.div
             initial={{ opacity: 0, x: -20 }}
