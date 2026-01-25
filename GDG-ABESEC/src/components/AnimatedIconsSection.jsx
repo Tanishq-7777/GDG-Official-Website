@@ -95,32 +95,32 @@ const AnimatedIconsSection = () => {
         </svg>
       )
     },
-    {
-      id: 3,
-      name: 'Trophy',
-      svg: (isHovered) => (
-        <svg viewBox="0 0 200 200" className="w-full h-full" style={{ perspective: '800px' }}>
-          <g className={isHovered ? 'trophy-rotate-3d' : ''} style={{ transformOrigin: '100px 120px', transformStyle: 'preserve-3d' }}>
-            <path d="M 60 85 Q 45 85 45 100 Q 45 115 60 115" fill="none" stroke="#FFC107" strokeWidth="3"/>
-            <path d="M 140 85 Q 155 85 155 100 Q 155 115 140 115" fill="none" stroke="#FFC107" strokeWidth="3"/>
+    // {
+    //   id: 3,
+    //   name: 'Trophy',
+    //   svg: (isHovered) => (
+    //     <svg viewBox="0 0 200 200" className="w-full h-full" style={{ perspective: '800px' }}>
+    //       <g className={isHovered ? 'trophy-rotate-3d' : ''} style={{ transformOrigin: '100px 120px', transformStyle: 'preserve-3d' }}>
+    //         <path d="M 60 85 Q 45 85 45 100 Q 45 115 60 115" fill="none" stroke="#FFC107" strokeWidth="3"/>
+    //         <path d="M 140 85 Q 155 85 155 100 Q 155 115 140 115" fill="none" stroke="#FFC107" strokeWidth="3"/>
             
-            <path d="M 60 80 Q 60 110 80 120 L 80 145 L 120 145 L 120 120 Q 140 110 140 80 Z" fill="none" stroke="#FFC107" strokeWidth="3"/>
-            <rect x="70" y="145" width="60" height="25" fill="none" stroke="#FFC107" strokeWidth="3"/>
-            <rect x="50" y="170" width="100" height="10" fill="#FFC107" fillOpacity="0.3" stroke="#FFC107" strokeWidth="2"/>
+    //         <path d="M 60 80 Q 60 110 80 120 L 80 145 L 120 145 L 120 120 Q 140 110 140 80 Z" fill="none" stroke="#FFC107" strokeWidth="3"/>
+    //         <rect x="70" y="145" width="60" height="25" fill="none" stroke="#FFC107" strokeWidth="3"/>
+    //         <rect x="50" y="170" width="100" height="10" fill="#FFC107" fillOpacity="0.3" stroke="#FFC107" strokeWidth="2"/>
             
-            <g className={isHovered ? 'trophy-code-fade' : ''}>
-              <text x="75" y="105" fontSize="24" fill="#2196F3" fontWeight="bold">&lt;</text>
-              <text x="98" y="105" fontSize="24" fill="#2196F3" fontWeight="bold">/</text>
-              <text x="110" y="105" fontSize="24" fill="#2196F3" fontWeight="bold">&gt;</text>
-            </g>
+    //         <g className={isHovered ? 'trophy-code-fade' : ''}>
+    //           <text x="75" y="105" fontSize="24" fill="#2196F3" fontWeight="bold">&lt;</text>
+    //           <text x="98" y="105" fontSize="24" fill="#2196F3" fontWeight="bold">/</text>
+    //           <text x="110" y="105" fontSize="24" fill="#2196F3" fontWeight="bold">&gt;</text>
+    //         </g>
             
-            <ellipse cx="100" cy="60" rx="42" ry="8" fill="#FFC107" fillOpacity="0.3" stroke="#FFC107" strokeWidth="2"/>
-            <path d="M 60 80 L 60 60 Q 100 55 140 60 L 140 80" fill="#FFC107" fillOpacity="0.1" stroke="#FFC107" strokeWidth="3"/>
-            <ellipse cx="100" cy="60" rx="8" ry="4" fill="#FFC107" stroke="#FFC107" strokeWidth="2"/>
-          </g>
-        </svg>
-      )
-    },
+    //         <ellipse cx="100" cy="60" rx="42" ry="8" fill="#FFC107" fillOpacity="0.3" stroke="#FFC107" strokeWidth="2"/>
+    //         <path d="M 60 80 L 60 60 Q 100 55 140 60 L 140 80" fill="#FFC107" fillOpacity="0.1" stroke="#FFC107" strokeWidth="3"/>
+    //         <ellipse cx="100" cy="60" rx="8" ry="4" fill="#FFC107" stroke="#FFC107" strokeWidth="2"/>
+    //       </g>
+    //     </svg>
+    //   )
+    // },
     {
       id: 4,
       name: 'Calendar Pages',
