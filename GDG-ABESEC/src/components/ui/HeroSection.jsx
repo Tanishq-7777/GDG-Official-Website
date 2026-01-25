@@ -131,7 +131,7 @@ export function HeroSection() {
             <path
               d="M 60 0 L 0 0 0 60"
               fill="none"
-              stroke="rgba(160,180,200,0.15)"
+              stroke="rgba(74,111,165,0.18)"
               strokeWidth="0.5"
             />
           </pattern>
@@ -145,7 +145,7 @@ export function HeroSection() {
           className="grid-line" 
           style={{ 
             animationDelay: "0.5s",
-            stroke: `rgba(160,180,200,0.15)`,
+            stroke: `rgba(74,111,165,0.18)`,
             strokeDasharray: "1000",
             strokeDashoffset: "1000",
             opacity: 0,
@@ -160,7 +160,7 @@ export function HeroSection() {
           className="grid-line" 
           style={{ 
             animationDelay: "1s",
-            stroke: `rgba(160,180,200,0.15)`,
+            stroke: `rgba(74,111,165,0.18)`,
             strokeDasharray: "1000",
             strokeDashoffset: "1000",
             opacity: 0,
@@ -175,7 +175,7 @@ export function HeroSection() {
           className="grid-line" 
           style={{ 
             animationDelay: "1.5s",
-            stroke: `rgba(160,180,200,0.15)`,
+            stroke: `rgba(74,111,165,0.18)`,
             strokeDasharray: "1000",
             strokeDashoffset: "1000",
             opacity: 0,
@@ -190,7 +190,7 @@ export function HeroSection() {
           className="grid-line" 
           style={{ 
             animationDelay: "2s",
-            stroke: `rgba(160,180,200,0.15)`,
+            stroke: `rgba(74,111,165,0.18)`,
             strokeDasharray: "1000",
             strokeDashoffset: "1000",
             opacity: 0,
@@ -205,7 +205,7 @@ export function HeroSection() {
           className="grid-line"
           style={{ 
             animationDelay: "2.5s",
-            stroke: `rgba(160,180,200,0.05)`,
+            stroke: `rgba(74,111,165,0.18)`,
             strokeDasharray: "1000",
             strokeDashoffset: "1000",
             opacity: 0,
@@ -220,7 +220,7 @@ export function HeroSection() {
           className="grid-line"
           style={{ 
             animationDelay: "3s",
-            stroke: `rgba(160,180,200,0.05)`,
+            stroke: `rgba(74,111,165,0.18)`,
             strokeDasharray: "1000",
             strokeDashoffset: "1000",
             opacity: 0,
@@ -332,10 +332,10 @@ export function HeroSection() {
       <div className="floating-element" style={{ top: "75%", left: "90%", animationDelay: "6.5s" }}></div>
 
   <div className="relative z-10 h-full flex flex-col justify-between items-center px-8 py-12 md:px-16 md:py-20">
-  <div className="text-center mt-30 md:mt-10">
+  <div className="text-center mt-20 sm:mt-24 md:mt-10">
     <h2
       className="text-xs md:text-sm font-mono font-light mt-10 md:mt-12 uppercase tracking-[0.2em] opacity-80"
-      style={{ color: colors[200] }}
+      style={{ color: "rgba(230, 240, 255, 0.85)" }}
     >
       <span 
         className="word inline-block" 
@@ -461,12 +461,12 @@ export function HeroSection() {
     <div
       className="mt-4 w-16 h-px opacity-30 mx-auto"
       style={{
-        background: `linear-gradient(to right, transparent, ${colors[200]}, transparent)`,
+        background: `linear-gradient(to right, transparent, ${blueAccent[500]}, transparent)`,
       }}
     ></div>
   </div>
 
-  <div className="text-center max-w-4xl mx-auto relative -mt-30 md:mt-0">
+  <div className="text-center max-w-4xl mx-auto relative -mt-10 sm:-mt-12 md:mt-0">
     <h1
       className="text-3xl md:text-5xl lg:text-6xl font-extralight leading-tight tracking-tight"
       style={{ color: colors[50] }}
@@ -606,8 +606,8 @@ export function HeroSection() {
         </span>{" "}
       </div>
       <div
-        className="text-xl md:text-2xl lg:text-3xl mt-12 md:mt-8 md:mt-20 font-thin leading-relaxed"
-        style={{ color: colors[200] }}
+        className="text-xl md:text-2xl lg:text-3xl mt-8 sm:mt-10 md:mt-20 font-thin leading-relaxed"
+        style={{ color: "rgba(230, 240, 255, 0.85)" }}
       >
         <span 
           className="word inline-block" 
