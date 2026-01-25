@@ -65,6 +65,19 @@ const mockProjects = [
     deployed_url: "https://campus--shield.vercel.app/",
     tech_stack: ["React JS", "Typescript", "Tailwind CSS", "Firebase"],
   },
+  {
+    id: 4,
+    title: "Muvies",
+    description:
+      "Muvies is a full-stack multimedia platform designed to provide users with seamless access to movies and music in one place. The application allows users to explore movies, watch trailers, and create personalized watchlists. Alongside movies, users can stream and download music, making it a complete entertainment solution.",
+    thumbnail_url: "/projects-imgs/tanishq-project.png",
+    owner_image: "/projects-imgs/tanishq.jpeg",
+    owner_name: "Tanishq Saxena",
+    github_url: "https://github.com/Tanishq-7777/miniProjectMoviesSpace",
+    linkedin_url: "https://www.linkedin.com/in/tanishq-saxena-20bb75344/",
+    deployed_url: "https://mini-project-movies-space.vercel.app/",
+    tech_stack: ["React JS", "Node JS", "Tailwind CSS", "Express JS"],
+  },
 ];
 const mockAchievements = [
   {
