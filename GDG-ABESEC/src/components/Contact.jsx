@@ -112,14 +112,14 @@ export default function Contact() {
     {
       icon: Mail,
       title: "Email",
-      content: "dsc@abesec.ac.in",
+      content: "dsc@abes.ac.in",
       subContent: "We reply within 24 hours",
       themeHex: "#EA4335",
     },
     {
       icon: Phone,
       title: "Phone",
-      content: "+91 120 123 4567",
+      content: "+91 98388 91188",
       subContent: "Mon-Fri, 9am-6pm",
       themeHex: "#34A853",
     },

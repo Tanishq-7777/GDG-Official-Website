@@ -33,13 +33,13 @@ function Footer() {
   const contactInfo = [
     {
       icon: <Mail size={18} className="text-[#3ca2fa]" />,
-      text: "dsc@abesec.ac.in",
-      href: "mailto:dsc@abesec.ac.in",
+      text: "dsc@abes.ac.in",
+      href: "mailto:dsc@abes.ac.in",
     },
     {
       icon: <Phone size={18} className="text-[#3ca2fa]" />,
-      text: "+91 120 123 4567",
-      href: "tel:+911201234567",
+      text: "+91 98388 91188",
+      href: "tel:+919838891188",
     },
     {
       icon: <MapPin size={18} className="text-[#3ca2fa]" />,
